@@ -70,4 +70,8 @@ public class Personagem {
         this.pontosVida -= dano;
         System.out.println(this.nome + " recebeu" + dano + "de dano! Vida atual:" + pontosVida);
     }
+
+    protected int UsarItem() {
+        
+    }
 }
