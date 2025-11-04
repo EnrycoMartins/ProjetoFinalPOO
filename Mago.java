@@ -48,16 +48,6 @@ public class Mago extends Personagem {
             System.out.println("Mana insuficiente!");
         }
     }
-    
-    public void ExplosaoGalactica() {
-        if (this.mana >= 90) {
-            this.mana -= 90;
-            System.out.println(getNome() + " EXPLOSÃO GALÁCTICA! MORRA!!! 🌑🌀🌑 ");
-        } else {
-            System.out.println("Mana insuficiente!");
-        }
-    }
-    
     public void CicloDasSeisExistencias() {
         if (this.mana >= 100) {
             this.mana -= 100;
