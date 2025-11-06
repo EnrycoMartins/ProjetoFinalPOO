@@ -7,8 +7,8 @@ public abstract class Personagem {
     private int pontosVidaMaximos; 
     private int ataque;
     private int defesa;
-    protected Inventario inventario; // Protected para subclasses
-    protected Dado d20;             // Protected para subclasses
+    protected Inventario inventario; 
+    protected Dado d20;             
 
     public Personagem(String nome, int pvMax, int atq, int def, Inventario inventario) {
         setNome(nome);
@@ -16,12 +16,9 @@ public abstract class Personagem {
         this.pontosVida = pvMax; 
         this.ataque = atq;
         this.defesa = def;
-        this.inventario = new Inventario(inventario); // Cria cópia
-        this.d20 = new Dado(20); // O Personagem cria seu D20
+        this.inventario = new Inventario(inventario);
+        this.d20 = new Dado(20); 
     }
-    
-    // (Construtor de cópia, Getters, Setters, atacar(), receberDano(), receberCura()...)
-    // (Coloque aqui os outros métodos da classe Personagem)
     
     // --- Getters e Setters necessários ---
     public void setNome(String nome) {

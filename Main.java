@@ -85,11 +85,14 @@ public class Main {
 
         // Cria o inventário inicial do jogador
         Inventario mochila = new Inventario();
+
         mochila.adicionar(new Item("Poção de Cura", "Restaura 25 PV.", Efeito.CURA, 3));
         mochila.adicionar(new Item("Andorinha", "Restaura 2 Sinais.", Efeito.CURA_SINAL, 2));
+        mochila.adicionar(new Item("Trovoada", "Aumenta ataque em 5.", Efeito.BUFF_ATAQUE, 1));
+
 
         // Bruxo(nome, pv, atqFísico, def, inventario, poderDeSinal)
-        Bruxo jogador = new Bruxo(nome, 100, 5, 14, mochila, 8);
+        Bruxo jogador = new Bruxo(nome, 100, 5, 14, mochila, 5);
         System.out.println("\n" + nome + ", o Bruxo, foi criado!");
         
         return jogador;
