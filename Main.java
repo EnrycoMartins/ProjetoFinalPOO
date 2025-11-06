@@ -154,7 +154,7 @@ public class Main {
 private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inimigo inimigo) {
     
     Inventario mochila = jogador.getInventario(); 
-    
+    //  Se o jogador for Bruxo esses sãos as opções:
     if (jogador instanceof Bruxo) {
         Bruxo bruxo = (Bruxo) jogador;
         switch (escolha) {
@@ -219,7 +219,7 @@ private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inim
                 return true; // Turno concluído (gasto)
         }
     } else {
-        // Lógica para outras classes (agora também com menu numérico)
+        // Lógica para outras classes 
         switch (escolha) {
             case 1:
                 jogador.atacar(inimigo);

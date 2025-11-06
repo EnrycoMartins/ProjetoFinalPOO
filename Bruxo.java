@@ -71,7 +71,7 @@ public class Bruxo extends Personagem {
         System.out.println(this.getNome() + " lança o sinal Igni contra " + inimigo.getNome() + "!");
         System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
 
-        // 2. ROLAGEM DE ATAQUE MÁGICO (Para Acertar)
+        // 2. ROLAGEM DE ATAQUE(Para Acertar)
         int rolagemAtaque = this.d20.rolar() + this.poderDeSinal; // d20 + Bônus de Poder de Sinal
         System.out.println("Rolagem de Ataque Mágico: (D20: " + (rolagemAtaque - this.poderDeSinal) + 
                            " + Poder: " + this.poderDeSinal + " = " + rolagemAtaque + ")");
@@ -108,7 +108,7 @@ public class Bruxo extends Personagem {
         System.out.println(this.getNome() + " lança o sinal aard contra " + inimigo.getNome() + "!");
         System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
 
-        // 2. ROLAGEM DE ATAQUE MÁGICO (Para Acertar)
+        // 2. ROLAGEM DE ATAQUE(Para Acertar)
         int rolagemAtaque = this.d20.rolar() + this.poderDeSinal; // d20 + Bônus de Poder de Sinal
         System.out.println("Rolagem de Ataque Mágico: (D20: " + (rolagemAtaque - this.poderDeSinal) + 
                            " + Poder: " + this.poderDeSinal + " = " + rolagemAtaque + ")");
@@ -120,7 +120,7 @@ public class Bruxo extends Personagem {
             // 4. ROLAGEM DE DANO (Se Acertou)
             // Vamos rolar o d20 de novo para o dano + poder de sinal
             int danoBase = this.d20.rolar();
-            int danoTotal = danoBase + this.poderDeSinal;
+            int danoTotal = (danoBase + this.poderDeSinal) - 5 ;
             System.out.println("Dano de Vento: (D20: " + danoBase + " + Poder: " + this.poderDeSinal + " = " + danoTotal + " de dano)");
             
             // Aplica o dano ao inimigo
