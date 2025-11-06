@@ -1,19 +1,19 @@
 import java.util.Scanner;
+import java.util.List;
 public class Main {
 
     // Scanner global para ser usado por todos os métodos
     private static Scanner scanner = new Scanner(System.in);
 
+    // SUBSTITUA O MÉTODO 'main' INTEIRO POR ESTE:
     public static void main(String[] args) {
         
         imprimirIntroducao();
         
         // 1. CRIAÇÃO DO PERSONAGEM
-        // O método criarPersonagem() cuida da seleção de classe e nome
         Personagem jogador = criarPersonagem();
 
         // 2. CRIAÇÃO DO INIMIGO
-        // O Inimigo é criado para a primeira batalha
         Inimigo inimigo = criarInimigo();
 
         System.out.println("\n--- A BATALHA COMEÇA! ---");
@@ -25,7 +25,6 @@ public class Main {
             // --- TURNO DO JOGADOR ---
             exibirStatus(jogador, inimigo);
             int escolha = exibirOpcoesJogador(jogador);
-            executarAcaoJogador(escolha, jogador, inimigo);
             
             boolean turnoConcluido = executarAcaoJogador(escolha, jogador, inimigo);
 
@@ -45,7 +44,6 @@ public class Main {
             aguardarEnter();
 
             // --- TURNO DO INIMIGO ---
-            // A classe Inimigo decide o que fazer sozinha!
             inimigo.decidirAcao(jogador);
             
             // Verifica se o jogador foi derrotado
@@ -58,13 +56,11 @@ public class Main {
             if (emCombate) {
                 aguardarEnter();
             }
-        }
-        
-        System.out.println("\nObrigado por jogar!");
-        scanner.close();
     }
-
-
+    
+    System.out.println("\nObrigado por jogar!");
+    scanner.close();
+}
     /**
      * Cuida da criação do personagem, seleção de classe e nome.
      */
@@ -105,10 +101,10 @@ public class Main {
     private static Inimigo criarInimigo() {
         Inventario mochilaGoblin = new Inventario();
         // Inimigo(nome, pv, atq, def, inventario)
-        Inimigo inimigo = new Inimigo("Goblin Sorrateiro", 50, 4, 12, mochilaGoblin);
+        Inimigo inimigo = new Inimigo("Afogador", 50, 4, 12, mochilaGoblin);
         
-        System.out.println("\nVocê entra na floresta escura...");
-        System.out.println("De repente, um " + inimigo.getNome() + " pula das sombras!");
+        System.out.println("\nVocê chega perto do rio nevoluso...");
+        System.out.println("De repente, um " + inimigo.getNome() + " pula das águas!");
         return inimigo;
     }
 
@@ -120,7 +116,7 @@ public class Main {
         // Mostra status do Jogador
         System.out.print("👤 " + jogador.getNome() + " | HP: " + jogador.getPontosdeVida());
         
-        // Se for um Bruxo, mostra os Sinais (usando o getter que você adicionou)
+        // Se for um Bruxo, mostra os Sinais
         if (jogador instanceof Bruxo) {
             // Converte o "Personagem" para "Bruxo" temporariamente
             Bruxo bruxo = (Bruxo) jogador;
@@ -155,12 +151,6 @@ public class Main {
         return escolha;
     }
 
-    // SUBSTITUA O MÉTODO 'executarAcaoJogador' INTEIRO POR ESTE:
-
-/**
- * Executa a ação do jogador.
- * @return 'true' se o turno foi concluído, 'false' se o jogador cancelou a ação.
- */
 private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inimigo inimigo) {
     
     Inventario mochila = jogador.getInventario(); 
@@ -178,55 +168,94 @@ private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inim
                 bruxo.lancarAard(inimigo); 
                 return true; // Turno concluído
             case 4:
-                // === INÍCIO DA MUDANÇA ===
-                System.out.println(mochila.toString());
 
-                if (mochila.estaVazio()) {
+                // 1. Pega a lista de itens reais do inventário
+                List<Item> itens = mochila.listarOrdenado();
+
+                if (itens.isEmpty()) {
                     System.out.println("...você não tem nada para usar.");
                     return false; // Turno NÃO concluído, volta ao menu
                 }
                 
-                System.out.print("\nQual item usar? (Ou digite 'voltar' para cancelar): ");
-                String nomeItem = scanner.nextLine();
+                // 2. Imprime a lista manualmente com números
+                System.out.println("=== INVENTÁRIO ===");
+                for (int i = 0; i < itens.size(); i++) {
+                    Item item = itens.get(i);
+                    // O número do item é (i + 1)
+                    System.out.printf("%d. %s (%s) - %d unidades\n", 
+                        (i + 1), item.getNome(), item.getEfeito(), item.getQuantidade());
+                }
+                System.out.println("0. Voltar");
+                
+                // 3. Pede um NÚMERO
+                System.out.print("\nEscolha o item (pelo número) ou 0 para voltar: ");
+                int escolhaItem = scanner.nextInt();
+                scanner.nextLine(); // Limpa o buffer
 
-                // Opção de cancelar
-                if (nomeItem.equalsIgnoreCase("voltar")) {
+                // 4. Lógica da escolha
+                if (escolhaItem == 0) {
                     System.out.println("Você guarda o item de volta na mochila.");
                     return false; // Turno NÃO concluído, volta ao menu
-                }
                 
-                // Se não cancelou, tenta usar o item
-                bruxo.usarItem(nomeItem);
-                return true; // Turno concluído (mesmo se o item falhar)
-                // === FIM DA MUDANÇA ===
+                } else if (escolhaItem > 0 && escolhaItem <= itens.size()) {
+                    // Se a escolha for válida (ex: 1 ou 2)
+                    
+                    // Pega o item da lista (índice é escolha - 1)
+                    Item itemEscolhido = itens.get(escolhaItem - 1);
+                    
+                    // Pega o NOME do item e manda para o método usarItem
+                    String nomeItem = itemEscolhido.getNome();
+                    bruxo.usarItem(nomeItem);
+                    
+                    return true; // Turno concluído
+                } else {
+                    System.out.println("Número de item inválido!");
+                    return false; // Turno NÃO concluído, volta ao menu
+                }
+                // === FIM DA NOVA LÓGICA ===
+                
             default:
                 System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                 return true; // Turno concluído (gasto)
         }
     } else {
-        // Lógica para outras classes
+        // Lógica para outras classes (agora também com menu numérico)
         switch (escolha) {
             case 1:
                 jogador.atacar(inimigo);
                 return true;
             case 2:
-                System.out.println(mochila.toString());
-
-                if (mochila.estaVazio()) {
+                List<Item> itens = mochila.listarOrdenado();
+                if (itens.isEmpty()) {
                     System.out.println("...você não tem nada para usar.");
-                    return false; // Turno NÃO concluído
+                    return false; 
                 }
                 
-                System.out.print("\nQual item usar? (Ou digite 'voltar' para cancelar): ");
-                String nomeItem = scanner.nextLine();
+                System.out.println("=== INVENTÁRIO ===");
+                for (int i = 0; i < itens.size(); i++) {
+                    Item item = itens.get(i);
+                    System.out.printf("%d. %s (%s) - %d unidades\n", 
+                        (i + 1), item.getNome(), item.getEfeito(), item.getQuantidade());
+                }
+                System.out.println("0. Voltar");
+                
+                System.out.print("\nEscolha o item (pelo número) ou 0 para voltar: ");
+                int escolhaItem = scanner.nextInt();
+                scanner.nextLine();
 
-                if (nomeItem.equalsIgnoreCase("voltar")) {
+                if (escolhaItem == 0) {
                     System.out.println("Você guarda o item de volta na mochila.");
-                    return false; // Turno NÃO concluído
-                }
+                    return false; 
                 
-                jogador.usarItem(nomeItem);
-                return true; // Turno concluído
+                } else if (escolhaItem > 0 && escolhaItem <= itens.size()) {
+                    Item itemEscolhido = itens.get(escolhaItem - 1);
+                    String nomeItem = itemEscolhido.getNome();
+                    jogador.usarItem(nomeItem);
+                    return true; 
+                } else {
+                    System.out.println("Número de item inválido!");
+                    return false; 
+                }
             default:
                 System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                 return true;
