@@ -7,8 +7,10 @@ public class Dado {
         this.random = new Random();
         this.numerodeLados = Lados;
     }
+
     public int rolar() {
-        int numeroAleatorio = this.random.nextInt(20); //Gera numero aleatorio de 0 até 19
-        return numeroAleatorio + 1; // 0 vira 1 e 19 vira 20
+    int numeroAleatorio = this.random.nextInt(this.numerodeLados); 
+    return numeroAleatorio + 1; 
     }
+
 }

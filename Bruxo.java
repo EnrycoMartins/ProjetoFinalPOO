@@ -20,6 +20,10 @@ public class Bruxo extends Personagem {
             this.pontosDeSinal = this.pontosDeSinalMaximo;
         }
         System.out.println(this.getNome() + " restaurou " + quantidade + " Ponto(s) de Sinal! (Total: " + this.pontosDeSinal + ")");
+    }   
+
+    public int getPontosDeSinal() {
+        return this.pontosDeSinal;
     }
 
     @Override
