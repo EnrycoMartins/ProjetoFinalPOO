@@ -21,60 +21,160 @@ public final class Assassino extends Personagem {
     public int getStamina() { return stamina; }
 
     //// Métodos de Ataque ////
-
-    /**
-     * Dispara a besta acoplada na lâmina do caos.
-     * Custo de Stamina: 2
-     * Bônus de Ataque: +4
-     */
-    public int AtirarBestaLaminadoCaos() {
+    
+    //// Assassino(a) vai atirar com a besta
+    public void AtirarBestaLaminadoCaos(Personagem inimigo) {
         final int CUSTO_STAMINA_BESTA = 2;
         final int BONUS_ATAQUE_BESTA = 4;
+        System.out.println("--- Turno de " + this.getNome() + " ---");
 
         if (this.getStamina() < CUSTO_STAMINA_BESTA) {
             System.out.println(this.getNome() + " não tem stamina suficiente para atirar com a besta! Stamina: " + this.getStamina());
-            return 0; // Ataque falha
+            System.out.println(this.getNome() + " recorre a um ataque físico...");
+            super.atacar(inimigo); //
+            return; // Encerra o turno
         }
 
-        // Gasta a stamina
         this.setStamina(this.getStamina() - CUSTO_STAMINA_BESTA);
 
-        // Rola o dado e calcula o ataque
-        // Isso funciona pois 'd20' é 'protected' em Personagem.java
+        // ROLAGEM DE ATAQUE (Para Acertar)
         int RollDado = this.d20.rolar(); 
-        int atqTotal = RollDado + this.getAtaque() + BONUS_ATAQUE_BESTA;
+        int rolagemAtaque = RollDado + this.getAtaque() + BONUS_ATAQUE_BESTA;
 
         System.out.println(this.getNome() + " atira com a besta da lâmina do caos!");
-        System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Besta:" + BONUS_ATAQUE_BESTA + " = " + atqTotal);
+        System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Besta:" + BONUS_ATAQUE_BESTA + " = " + rolagemAtaque);
         
-        return atqTotal;
+        // COMPARAÇÃO COM DEFESA
+        if (rolagemAtaque > inimigo.getDefesa()) {
+            System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
+
+            // ROLAGEM DE DANO (Se Acertou)
+            int danoBase = this.d20.rolar();
+            int danoTotal = danoBase + this.getAtaque(); // Dano baseado no Ataque (como no Personagem)
+            System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
+            
+            inimigo.receberDano(danoTotal);
+
+        } else {
+            System.out.println("ERROU! (Rolagem " + rolagemAtaque + " <= Defesa " + inimigo.getDefesa() + ")");
+        }
+        System.out.println("--------------------");
     }
 
-    /**
-     * Realiza uma estocada precisa no pescoço com a lâmina do caos.
-     * Custo de Stamina: 4
-     * Bônus de Ataque: +8
-     */
-    public int EstocadaPescocoLaminadoCaos() {
+    //// Assassino(a) vai realizar uma estocada prescisa no pescoço do inimigo
+    public void EstocadaPescocoLaminadoCaos(Personagem inimigo) {
         final int CUSTO_STAMINA_ESTOCADA = 4;
-        final int BONUS_ATAQUE_ESTOCADA = 8; // Bônus alto para um golpe difícil
+        final int BONUS_ATAQUE_ESTOCADA = 8;
+        System.out.println("--- Turno de " + this.getNome() + " ---");
 
         if (this.getStamina() < CUSTO_STAMINA_ESTOCADA) {
             System.out.println(this.getNome() + " não tem stamina suficiente para a estocada! Stamina: " + this.getStamina());
-            return 0; // Ataque falha
+            System.out.println(this.getNome() + " recorre a um ataque físico...");
+            super.atacar(inimigo); //
+            return; // Encerra o turno
         }
 
-        // Gasta a stamina
         this.setStamina(this.getStamina() - CUSTO_STAMINA_ESTOCADA);
 
-        // Rola o dado e calcula o ataque
-        // Isso funciona pois 'd20' é 'protected' em Personagem.java
+        // ROLAGEM DE ATAQUE (Para Acertar)
         int RollDado = this.d20.rolar(); 
-        int atqTotal = RollDado + this.getAtaque() + BONUS_ATAQUE_ESTOCADA;
+        int rolagemAtaque = RollDado + this.getAtaque() + BONUS_ATAQUE_ESTOCADA;
 
         System.out.println(this.getNome() + " avança para uma estocada no pescoço com a lâmina do caos!");
-        System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Estocada:" + BONUS_ATAQUE_ESTOCADA + " = " + atqTotal);
+        System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Estocada:" + BONUS_ATAQUE_ESTOCADA + " = " + rolagemAtaque);
         
-        return atqTotal;
+        // COMPARAÇÃO COM DEFESA
+        if (rolagemAtaque > inimigo.getDefesa()) {
+            System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
+
+            // ROLAGEM DE DANO (Se Acertou)
+            int danoBase = this.d20.rolar();
+            int danoTotal = danoBase + this.getAtaque(); 
+            System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
+            
+            inimigo.receberDano(danoTotal);
+
+        } else {
+            System.out.println("ERROU! (Rolagem " + rolagemAtaque + " <= Defesa " + inimigo.getDefesa() + ")");
+        }
+        System.out.println("--------------------");
+    }
+
+    //// Assassino(a) vai lançar facas de arremeço no inimigo
+    public void LancarFacas(Personagem inimigo) {
+        final int CUSTO_STAMINA_FACAS = 1;
+        final int BONUS_ATAQUE_FACAS = 2;
+        System.out.println("--- Turno de " + this.getNome() + " ---");
+
+        if (this.getStamina() < CUSTO_STAMINA_FACAS) {
+            System.out.println(this.getNome() + " não tem stamina suficiente para lançar facas! Stamina: " + this.getStamina());
+            System.out.println(this.getNome() + " recorre a um ataque físico...");
+            super.atacar(inimigo); //
+            return; // Encerra o turno
+        }
+
+        this.setStamina(this.getStamina() - CUSTO_STAMINA_FACAS);
+
+        // ROLAGEM DE ATAQUE (Para Acertar)
+        int RollDado = this.d20.rolar(); 
+        int rolagemAtaque = RollDado + this.getAtaque() + BONUS_ATAQUE_FACAS; 
+
+        System.out.println(this.getNome() + " lança um conjunto de facas de arremesso!");
+        System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Facas:" + BONUS_ATAQUE_FACAS + " = " + rolagemAtaque);
+        
+        // COMPARAÇÃO COM DEFESA
+        if (rolagemAtaque > inimigo.getDefesa()) {
+            System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
+
+            // ROLAGEM DE DANO (Se Acertou)
+            int danoBase = this.d20.rolar();
+            int danoTotal = danoBase + this.getAtaque(); 
+            System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
+            
+            inimigo.receberDano(danoTotal);
+
+        } else {
+            System.out.println("ERROU! (Rolagem " + rolagemAtaque + " <= Defesa " + inimigo.getDefesa() + ")");
+        }
+        System.out.println("--------------------");
+    }
+
+    //// Assassino(a) vai lançar uma bomba de fumaça e atacar o inimigo
+    public void AtaqueComBombaDeFumaca(Personagem inimigo) {
+        final int CUSTO_STAMINA_FUMACA = 3;
+        final int BONUS_ATAQUE_FUMACA = 6; 
+        System.out.println("--- Turno de " + this.getNome() + " ---");
+
+        if (this.getStamina() < CUSTO_STAMINA_FUMACA) {
+            System.out.println(this.getNome() + " não tem stamina suficiente para a bomba de fumaça! Stamina: " + this.getStamina());
+            System.out.println(this.getNome() + " recorre a um ataque físico...");
+            super.atacar(inimigo); //
+            return; // Encerra o turno
+        }
+
+        this.setStamina(this.getStamina() - CUSTO_STAMINA_FUMACA);
+
+        // ROLAGEM DE ATAQUE (Para Acertar)
+        int RollDado = this.d20.rolar(); 
+        int rolagemAtaque = RollDado + this.getAtaque() + BONUS_ATAQUE_FUMACA; 
+
+        System.out.println(this.getNome() + " joga uma bomba de fumaça e ataca no meio da confusão!");
+        System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Fumaça:" + BONUS_ATAQUE_FUMACA + " = " + rolagemAtaque);
+        
+        // COMPARAÇÃO COM DEFESA
+        if (rolagemAtaque > inimigo.getDefesa()) {
+            System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
+
+            // ROLAGEM DE DANO (Se Acertou)
+            int danoBase = this.d20.rolar();
+            int danoTotal = danoBase + this.getAtaque(); 
+            System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
+            
+            inimigo.receberDano(danoTotal);
+
+        } else {
+            System.out.println("ERROU! (Rolagem " + rolagemAtaque + " <= Defesa " + inimigo.getDefesa() + ")");
+        }
+        System.out.println("--------------------");
     }
 }
