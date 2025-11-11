@@ -23,7 +23,7 @@ public abstract class Personagem {
         this.d20 = new Dado(20); 
     }
     
-    // --- Getters e Setters necessários ---
+    // --- Getters e Setters ---
     public void setNome(String nome) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("O nome está vazio!");
