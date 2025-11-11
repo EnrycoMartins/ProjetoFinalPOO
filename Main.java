@@ -102,10 +102,10 @@ public class Main {
         Personagem jogador = null;
         if (classe == 1){
             // Bruxo(nome, pv, atqFísico, def, inventario, poderDeSinal)
-            jogador = new Bruxo(nome, 100, 5, 14, mochila, 5);
+            jogador = new Bruxo(nome, 120, 5, 14, mochila, 7);
             System.out.println("\n" + nome + ", o Bruxo, foi criado!");
         } else if (classe == 3) {
-            jogador = new Assassino(nome, 90, 8, 12, mochila, 10);
+            jogador = new Assassino(nome, 90, 8, 12, mochila, 12);
             System.out.println("\n" + nome + ", O Assassino, foi criado!");
         }
         
