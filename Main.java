@@ -16,7 +16,10 @@ public class Main {
         aguardarEnter();
         System.out.println("Seus ouvidos são tomados por uma maré sonora vinda das milhares de vozes ao seu redor.");
         aguardarEnter();
-        System.out.println("----------------------------------------");
+        System.out.println("Os Aldeões estão furiosos, após se espremer pela multidão para chegar perto ao quadro, você consegue ler o aviso recém pregado.");
+        aguardarEnter();
+        System.out.println("No papel está escrito: Monstro que perambula na floresta ao redor da vila já matou 3 moradores, recompensa de 1000 gilles para quem trouxer-me a sua cabeça. Converse com Pocho na cabana do magistrado.");
+        aguardarEnter();
 
         Inimigo inimigo = criarInimigo();
 
@@ -106,9 +109,9 @@ public class Main {
      * Cria e retorna o primeiro inimigo.
      */
     private static Inimigo criarInimigo() {
-        Inventario mochilaGoblin = new Inventario();
+        Inventario mochilaAfogador = new Inventario();
         // Inimigo(nome, pv, atq, def, inventario)
-        Inimigo inimigo = new Inimigo("Afogador", 50, 4, 12, mochilaGoblin);
+        Inimigo inimigo = new Inimigo("Afogador", 50, 4, 12, mochilaAfogador);
         
         System.out.println("\nVocê chega perto do rio nevoluso...");
         System.out.println("De repente, um " + inimigo.getNome() + " pula das águas!");
@@ -127,7 +130,7 @@ public class Main {
         if (jogador instanceof Bruxo) {
             // Converte o "Personagem" para "Bruxo" temporariamente
             Bruxo bruxo = (Bruxo) jogador;
-            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/8");
+            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/");
         }
         
         System.out.println("\n----------------------------------------");
