@@ -105,7 +105,7 @@ public class Main {
             jogador = new Bruxo(nome, 100, 5, 14, mochila, 5);
             System.out.println("\n" + nome + ", o Bruxo, foi criado!");
         } else if (classe == 3) {
-            jogador = new Assassino(nome, 100, 7, 12, mochila, 10);
+            jogador = new Assassino(nome, 90, 8, 12, mochila, 10);
             System.out.println("\n" + nome + ", O Assassino, foi criado!");
         }
         
