@@ -33,6 +33,7 @@ public abstract class Personagem {
 
     public Inventario getInventario() {return this.inventario;}
     public int getPontosdeVida() {return this.pontosVida;}
+    public int getPontosdeVidaMaximos() {return this.pontosVidaMaximos;}
     public String getNome() { return nome; }
     public int getAtaque() { return ataque; }
     public void setAtaque(int ataque) { this.ataque = ataque; }
