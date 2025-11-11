@@ -2,57 +2,61 @@ import java.util.Scanner;
 import java.util.List;
 public class Main {
 
-    // Scanner global para ser usado por todos os métodos
     private static Scanner scanner = new Scanner(System.in);
 
-    // SUBSTITUA O MÉTODO 'main' INTEIRO POR ESTE:
     public static void main(String[] args) {
         
         imprimirIntroducao();
         
-        // 1. CRIAÇÃO DO PERSONAGEM
         Personagem jogador = criarPersonagem();
 
-        // 2. CRIAÇÃO DO INIMIGO
+        System.out.println("Ao chegar nos portões da vila, você encherga um multidão ao redor de um quadro de avisos.");
+        aguardarEnter();
+        System.out.println("Chegando mais perto é possivel ver um aldeão pregando um novo aviso no quadro...");
+        aguardarEnter();
+        System.out.println("Seus ouvidos são tomados por uma maré sonora vinda das milhares de vozes ao seu redor.");
+        aguardarEnter();
+        System.out.println("----------------------------------------");
+
         Inimigo inimigo = criarInimigo();
 
         System.out.println("\n--- A BATALHA COMEÇA! ---");
         
-        // 3. LOOP DE COMBATE
         boolean emCombate = true;
         while (emCombate) {
 
             // --- TURNO DO JOGADOR ---
+            
+            jogador.processarBuffs(); // Faz a contagem do buff do jogador
+            
             exibirStatus(jogador, inimigo);
             int escolha = exibirOpcoesJogador(jogador);
             
             boolean turnoConcluido = executarAcaoJogador(escolha, jogador, inimigo);
 
             if (!turnoConcluido) {
-                // Se o turno não foi concluído (jogador volta pra tela de combate).
                 continue; 
             }
             
-            // Verifica se o inimigo foi derrotado
             if (inimigo.getPontosdeVida() <= 0) {
                 System.out.println("\n🎉 Você derrotou " + inimigo.getNome() + "! 🎉");
-                emCombate = false; // Termina o loop de combate
-                continue; // Pula o turno do inimigo
+                emCombate = false;
+                continue; 
             }
 
-            // Pausa para ler
             aguardarEnter();
 
             // --- TURNO DO INIMIGO ---
+            
+            inimigo.processarBuffs(); // Faz a contagem do buff do inimigo
+            
             inimigo.decidirAcao(jogador);
             
-            // Verifica se o jogador foi derrotado
             if (jogador.getPontosdeVida() <= 0) {
                 System.out.println("\n💀 " + jogador.getNome() + " foi derrotado... Fim de Jogo. 💀");
-                emCombate = false; // Termina o loop de combate
+                emCombate = false; 
             }
 
-            // Pausa para ler
             if (emCombate) {
                 aguardarEnter();
             }
@@ -117,60 +121,68 @@ public class Main {
     private static void exibirStatus(Personagem jogador, Inimigo inimigo) {
         System.out.println("\n========================================");
         // Mostra status do Jogador
-        System.out.print("👤 " + jogador.getNome() + " | HP: " + jogador.getPontosdeVida());
+        System.out.print("👤 " + jogador.getNome() + " | HP: " + jogador.getPontosdeVida()+" | Defesa: " + jogador.getDefesa());
         
         // Se for um Bruxo, mostra os Sinais
         if (jogador instanceof Bruxo) {
             // Converte o "Personagem" para "Bruxo" temporariamente
             Bruxo bruxo = (Bruxo) jogador;
-            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/6");
+            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/8");
         }
         
         System.out.println("\n----------------------------------------");
         // Mostra status do Inimigo
-        System.out.println("👹 " + inimigo.getNome() + " | HP: " + inimigo.getPontosdeVida());
+        System.out.println("👹 " + inimigo.getNome() + " | HP: " + inimigo.getPontosdeVida()+" | Defesa: " + inimigo.getDefesa());
         System.out.println("========================================");
     }
 
     /**
      * Mostra as opções de ação do jogador e retorna a escolha.
      */
+    
     private static int exibirOpcoesJogador(Personagem jogador) {
         System.out.println("É seu turno. O que fazer?");
         System.out.println("1. Atacar (Espada)");
-        
-        // Mostra opções de magia apenas se for um Bruxo
+
         if (jogador instanceof Bruxo) {
             System.out.println("2. Lançar Igni (Custo: 2 Sinais)");
             System.out.println("3. Lançar Aard (Custo: 1 Sinal)");
-            System.out.println("4. Usar Item");
+            System.out.println("4. Lançar Quen (Custo: 2 Sinais)");
+            System.out.println("5. Lançar Axii (Custo: 3 Sinais)"); 
+            System.out.println("6. Usar Item");                     
         } else {
-            System.out.println("2. Usar Item"); // Opção 2 para outras classes
+            System.out.println("2. Usar Item"); 
         }
-        
+
         System.out.print("Escolha: ");
         int escolha = scanner.nextInt();
-        scanner.nextLine(); // Limpa o buffer do scanner
+        scanner.nextLine(); 
         return escolha;
     }
 
-private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inimigo inimigo) {
-    
-    Inventario mochila = jogador.getInventario(); 
-    //  Se o jogador for Bruxo esses sãos as opções:
-    if (jogador instanceof Bruxo) {
-        Bruxo bruxo = (Bruxo) jogador;
-        switch (escolha) {
-            case 1:
-                bruxo.atacar(inimigo); 
-                return true; // Turno concluído
-            case 2:
-                bruxo.lancarIgni(inimigo); 
-                return true; // Turno concluído
-            case 3:
-                bruxo.lancarAard(inimigo); 
-                return true; // Turno concluído
-            case 4:
+    private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inimigo inimigo) {
+        
+        Inventario mochila = jogador.getInventario(); 
+        //  Se o jogador for Bruxo esses sãos as opções:
+        if (jogador instanceof Bruxo) {
+            Bruxo bruxo = (Bruxo) jogador;
+            switch (escolha) {
+                case 1:
+                    bruxo.atacar(inimigo); 
+                    return true; // Turno concluído
+                case 2:
+                    bruxo.lancarIgni(inimigo); 
+                    return true; // Turno concluído
+                case 3:
+                    bruxo.lancarAard(inimigo); 
+                    return true; // Turno concluído
+                case 4:
+                    bruxo.lancarQuen(); 
+                    return true; // Turno concluído
+                case 5: 
+                    bruxo.lancarAxii(inimigo); 
+                    return true; // Turno concluído
+                case 6:
 
                 // 1. Pega a lista de itens reais do inventário
                 List<Item> itens = mochila.listarOrdenado();

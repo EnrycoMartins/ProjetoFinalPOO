@@ -8,7 +8,10 @@ public abstract class Personagem {
     private int ataque;
     private int defesa;
     protected Inventario inventario; 
-    protected Dado d20;             
+    protected Dado d20;       
+    protected int turnosBuffDefesa = 0; // Contador de turnos   
+    protected int turnosDebuffGeral = 0; // Contador de turnos
+    protected int valorDebuffGeral = 0;  
 
     public Personagem(String nome, int pvMax, int atq, int def, Inventario inventario) {
         setNome(nome);
@@ -36,6 +39,31 @@ public abstract class Personagem {
     public int getDefesa() { return defesa; }
     public void setDefesa(int defesa) { this.defesa = defesa; }
     
+    public void aplicarBuffDefesa(int valorBuff, int duracao) {
+        // Só aplica o buff se não houver um ativo
+        if (this.turnosBuffDefesa == 0) {
+            this.setDefesa(this.getDefesa() + valorBuff);
+            System.out.println("⭐ " + this.getNome() + " ganha +" + valorBuff + " de Defesa!");
+        } else {
+            System.out.println("⭐ " + this.getNome() + " renova seu buff de defesa!");
+        }
+        // Define (ou reinicia) a duração
+        this.turnosBuffDefesa = duracao;
+    }
+
+    public void aplicarDebuffGeral(int valorDebuff, int duracao) {
+        // Só aplica o debuff se não houver um ativo
+        if (this.turnosDebuffGeral == 0) {
+            this.valorDebuffGeral = valorDebuff; // Salva o valor (ex: -5)
+            this.setAtaque(this.getAtaque() + valorDebuff); // atk + (-5)
+            this.setDefesa(this.getDefesa() + valorDebuff); // def + (-5)
+            System.out.println("😵 " + this.getNome() + " é afetado por Axii! Ataque e Defesa -" + Math.abs(valorDebuff) + "!");
+        } else {
+            System.out.println("😵 " + this.getNome() + " renova o debuff de Axii!");
+        }
+        // Define ou reinicia a duração
+        this.turnosDebuffGeral = duracao;
+    }
     // --- Métodos de combate ---
     public void atacar(Personagem inimigo) {
     System.out.println("--- Turno de " + this.getNome() + " ---");
@@ -47,12 +75,11 @@ public abstract class Personagem {
                        " + Bônus: " + this.getAtaque() + " = " + rolagemAtaque + ")");
 
     // 2. COMPARAÇÃO COM DEFESA
-    // (Usando "maior que", como você pediu)
     if (rolagemAtaque > inimigo.getDefesa()) {
         System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
         
         // 3. ROLAGEM DE DANO (Se Acertou)
-        // Vamos re-rolar o d20 para o dano + bônus de ataque
+        // Re-rolar o d20 para o dano + bônus de ataque
         int danoBase = this.d20.rolar();
         int danoTotal = danoBase + this.getAtaque();
         System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
@@ -123,5 +150,37 @@ public abstract class Personagem {
         }
 
         this.inventario.remover(itemParaUsar.getNome(), itemParaUsar.getEfeito(), 1);
+    }
+
+    public void processarBuffs() {
+        // --- Processa Buff de Defesa  ---
+        if (this.turnosBuffDefesa > 0) {
+            this.turnosBuffDefesa--; // Reduz a duração
+
+            System.out.println("   (Buff de Defesa de " + this.getNome() + ": " + this.turnosBuffDefesa + " turnos restantes)");
+
+            // Se o buff acabou de expirar (chegou a 0)
+            if (this.turnosBuffDefesa == 0) {
+                int valorBuff = Efeito.BUFF_DEFESA.getValor(); // Pega o valor (5)
+                this.setDefesa(this.getDefesa() - valorBuff); // Remove o bônus
+                System.out.println("💨 O buff de Defesa de " + this.getNome() + " expirou!");
+            }
+        }
+
+        // --- Processa Debuff Geral  ---
+        if (this.turnosDebuffGeral > 0) {
+            this.turnosDebuffGeral--; // Reduz a duração
+
+            System.out.println("   (Debuff de status em " + this.getNome() + ": " + this.turnosDebuffGeral + " turnos restantes)");
+
+            // Se o buff acabou de expirar (chegou a 0)
+            if (this.turnosDebuffGeral == 0) {
+                // Remove o debuff (subtrai o valor negativo, ex: atk - (-5) = atk + 5)
+                System.out.println("✨ " + this.getNome() + " se recupera do Status Negativo!");
+                this.setAtaque(this.getAtaque() - this.valorDebuffGeral); 
+                this.setDefesa(this.getDefesa() - this.valorDebuffGeral);
+                this.valorDebuffGeral = 0; // Zera o valor
+            }
+        }
     }
 }

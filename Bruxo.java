@@ -3,10 +3,12 @@ import java.util.List;
 public class Bruxo extends Personagem {
 
     private int pontosDeSinal;
-    private final int pontosDeSinalMaximo = 6; 
+    private final int pontosDeSinalMaximo = 8; 
     private int poderDeSinal; 
     private final int CUSTO_IGNI = 2; 
     private final int CUSTO_AARD = 1;
+    private final int CUSTO_QUEN = 2;
+    private final int CUSTO_AXII = 3;
 
     public Bruxo(String nome, int pv, int atq, int def, Inventario inventario, int poderDeSinal) {
         super(nome, pv, atq, def, inventario); 
@@ -131,4 +133,53 @@ public class Bruxo extends Personagem {
         }
         System.out.println("--------------------");
     }
+    public void lancarQuen() {
+        // 1. VERIFICA SINAIS
+        if (this.pontosDeSinal < CUSTO_QUEN) {
+            System.out.println(this.getNome() + " tentou usar Quen, mas não tem Sinais suficientes!");
+            System.out.println("A magia falha...");
+            // O turno é gasto mesmo se falhar
+            return; 
+        }
+        // 2. GASTA SINAIS E APLICA O BUFF
+        this.pontosDeSinal -= CUSTO_QUEN;
+        System.out.println(this.getNome() + " usa o sinal Quen!");
+        System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
+
+        // 3. PEGA OS VALORES
+        int valorBuff = Efeito.BUFF_DEFESA.getValor(); // Pega o valor 5 do Enum
+        int duracao = 3; // O buff dura 2 turnos
+
+        // 4. CHAMA O MÉTODO DA CLASSE PAI
+        // 'this' (Só o Bruxo) recebe o buff
+        this.aplicarBuffDefesa(valorBuff, duracao);
+        
+        System.out.println("--------------------");
+    }
+
+    public void lancarAxii(Personagem inimigo) {
+        System.out.println("--- Turno de " + this.getNome() + " ---");
+        
+        // 1. VERIFICA SINAIS (Corrigido para CUSTO_AXII)
+        if (this.pontosDeSinal < CUSTO_AXII) {
+            System.out.println(this.getNome() + " tentou usar Axii, mas não tem Sinais suficientes!");
+            System.out.println("A magia falha...");
+            return; // Turno gasto
+        }
+
+        // 2. GASTA SINAIS
+        this.pontosDeSinal -= CUSTO_AXII;
+        System.out.println(this.getNome() + " usa o sinal Axii contra " + inimigo.getNome() + "!");
+        System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
+
+        // 3. DEFINE OS VALORES DO DEBUFF
+        int valorDebuff = -5; // O debuff de -5
+        int duracao = 3;    // 3 turnos
+
+        // 4. CHAMA O MÉTODO NO INIMIGO (o alvo)
+        inimigo.aplicarDebuffGeral(valorDebuff, duracao);
+        
+        System.out.println("--------------------");
+    }
+
 }
