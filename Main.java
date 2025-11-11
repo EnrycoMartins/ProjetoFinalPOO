@@ -75,19 +75,21 @@ public class Main {
         System.out.println("Escolha sua classe:");
         System.out.println("1. Bruxo (Disponível)");
         System.out.println("2. Mago (Indisponível)");
-        System.out.println("3. Assassino (Indisponível)");
+        System.out.println("3. Assassino (Disponível)");
         
         int classe = 0;
-        while (classe != 1) {
+        while (classe != 1 && classe != 3) {
             System.out.print("Opção: ");
             classe = scanner.nextInt();
-            if (classe != 1) {
+            if (classe == 2) {
                 System.out.println("Classe indisponível. Por favor, escolha Bruxo.");
+            } else if (classe != 1 && classe != 3) {
+                System.err.println("Opção inválida. Escolha 1 ou 3!");
             }
         }
         scanner.nextLine(); // Limpa o buffer do scanner
 
-        System.out.print("\nDigite o nome do seu Bruxo: ");
+        System.out.print("\nDigite o nome do seu Personagem: ");
         String nome = scanner.nextLine();
 
         // Cria o inventário inicial do jogador
@@ -97,10 +99,15 @@ public class Main {
         mochila.adicionar(new Item("Andorinha", "Restaura 2 Sinais.", Efeito.CURA_SINAL, 2));
         mochila.adicionar(new Item("Trovoada", "Aumenta ataque em 5.", Efeito.BUFF_ATAQUE, 1));
 
-
-        // Bruxo(nome, pv, atqFísico, def, inventario, poderDeSinal)
-        Bruxo jogador = new Bruxo(nome, 100, 5, 14, mochila, 5);
-        System.out.println("\n" + nome + ", o Bruxo, foi criado!");
+        Personagem jogador = null;
+        if (classe == 1){
+            // Bruxo(nome, pv, atqFísico, def, inventario, poderDeSinal)
+            jogador = new Bruxo(nome, 100, 5, 14, mochila, 5);
+            System.out.println("\n" + nome + ", o Bruxo, foi criado!");
+        } else if (classe == 3) {
+            jogador = new Assassino(nome, 100, 7, 12, mochila, 10);
+            System.out.println("\n" + nome + ", O Assassino, foi criado!");
+        }
         
         return jogador;
     }
@@ -131,6 +138,9 @@ public class Main {
             // Converte o "Personagem" para "Bruxo" temporariamente
             Bruxo bruxo = (Bruxo) jogador;
             System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/");
+        }else if (jogador instanceof Assassino) {
+            Assassino assassino = (Assassino) jogador;
+            System.out.println(" | Stamina: " + assassino.getStamina());
         }
         
         System.out.println("\n----------------------------------------");
@@ -153,6 +163,12 @@ public class Main {
             System.out.println("4. Lançar Quen (Custo: 2 Sinais)");
             System.out.println("5. Lançar Axii (Custo: 3 Sinais)"); 
             System.out.println("6. Usar Item");                     
+        } else if (jogador instanceof Assassino) {
+            System.out.println("2. Lançar Facas (Custo: 1 Stamina)");
+            System.out.println("3. Atirar Besta (Custo: 2 Stamina)");
+            System.out.println("4. Ataque com Fumaça (Custo: 3 Stamina)");
+            System.out.println("5. Estocada no Pescoço (Custo: 4 Stamina)");
+            System.out.println("6. Usar Item");
         } else {
             System.out.println("2. Usar Item"); 
         }
@@ -236,7 +252,75 @@ public class Main {
                 System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                 return true; // Turno concluído (gasto)
         }
-    } else {
+    } else if (jogador instanceof Assassino) {
+        Assassino assassino = (Assassino) jogador;
+        switch (escolha) {
+            case 1:
+                assassino.atacar(inimigo);
+                return true;
+            case 2:
+                assassino.LancarFacas(inimigo);
+                return true;
+            case 3:
+                assassino.AtirarBestaLaminadoCaos(inimigo);
+                return true;
+            case 4:
+                assassino.AtaqueComBombaDeFumaca(inimigo);
+                return true;
+            case 5:
+                assassino.EstocadaPescocoLaminadoCaos(inimigo);
+                return true;
+            case 6:
+                // 1. Pega a lista de itens reais do inventário
+                List<Item> itens = mochila.listarOrdenado();
+
+                if (itens.isEmpty()) {
+                    System.out.println("...você não tem nada para usar.");
+                    return false; // Turno NÃO concluído, volta ao menu
+                }
+                
+                // 2. Imprime a lista manualmente com números
+                System.out.println("=== INVENTÁRIO ===");
+                for (int i = 0; i < itens.size(); i++) {
+                    Item item = itens.get(i);
+                    // O número do item é (i + 1)
+                    System.out.printf("%d. %s (%s) - %d unidades\n", 
+                        (i + 1), item.getNome(), item.getEfeito(), item.getQuantidade());
+                }
+                System.out.println("0. Voltar");
+                
+                // 3. Pede um NÚMERO
+                System.out.print("\nEscolha o item (pelo número) ou 0 para voltar: ");
+                int escolhaItem = scanner.nextInt();
+                scanner.nextLine(); // Limpa o buffer
+
+                // 4. Lógica da escolha
+                if (escolhaItem == 0) {
+                    System.out.println("Você guarda o item de volta na mochila.");
+                    return false; // Turno NÃO concluído, volta ao menu
+                
+                } else if (escolhaItem > 0 && escolhaItem <= itens.size()) {
+                    // Se a escolha for válida (ex: 1 ou 2)
+                    
+                    // Pega o item da lista (índice é escolha - 1)
+                    Item itemEscolhido = itens.get(escolhaItem - 1);
+                    
+                    // Pega o NOME do item e manda para o método usarItem
+                    String nomeItem = itemEscolhido.getNome();
+                    assassino.usarItem(nomeItem);
+                    
+                    return true; // Turno concluído
+                } else {
+                    System.out.println("Número de item inválido!");
+                    return false; // Turno NÃO concluído, volta ao menu
+                }
+                // === FIM DA NOVA LÓGICA ===
+                
+            default:
+                System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
+                return true; // Turno concluído (gasto)
+        }
+        }else {
         // Lógica para outras classes 
         switch (escolha) {
             case 1:
@@ -279,7 +363,7 @@ public class Main {
                 return true;
         }
     }
-}
+    } 
 
     /**
      * Imprime a história de introdução.
