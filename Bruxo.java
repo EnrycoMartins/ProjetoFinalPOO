@@ -37,7 +37,7 @@ public class Bruxo extends Personagem {
             return;
         }
 
-        // 2. LÓGICA DO BRUXO: Procurar primeiro por itens de SINAL
+        // 2. Procurar primeiro por itens de SINAL
         Item itemDeSinal = null;
         for (Item item : itensEncontrados) {
             if (item.getEfeito() == Efeito.CURA_SINAL) {
@@ -180,6 +180,10 @@ public class Bruxo extends Personagem {
         inimigo.aplicarDebuffGeral(valorDebuff, duracao);
         
         System.out.println("--------------------");
+    }
+    public void restaurarSinaisTotalmente() {
+        this.pontosDeSinal = this.pontosDeSinalMaximo;
+        System.out.println("✨ " + this.getNome() + " teve seus Sinais totalmente restaurados! (" + this.pontosDeSinalMaximo + " Sinais)");
     }
 
 }

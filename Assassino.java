@@ -1,9 +1,11 @@
 public final class Assassino extends Personagem {
     private int stamina;
+    private int staminaMaxima;
 
     //// Construtor /////
     public Assassino(String nome, int pv, int atq, int def, Inventario inventario, int stamina) {
         super(nome, pv, atq, def, inventario);
+        this.staminaMaxima = stamina; 
         setStamina(stamina);
     }
     
@@ -177,4 +179,8 @@ public final class Assassino extends Personagem {
         }
         System.out.println("--------------------");
     }
+    public void restaurarStaminaTotalmente() {
+    this.stamina = this.staminaMaxima;
+    System.out.println("⚡ " + this.getNome() + " teve sua Stamina totalmente restaurada! (" + this.staminaMaxima + " Stamina)");
+}
 }

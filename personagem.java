@@ -184,4 +184,8 @@ public abstract class Personagem {
             }
         }
     }
+    public void curarTotalmente() {
+        this.pontosVida = this.pontosVidaMaximos;
+        System.out.println("❤️ " + this.getNome() + " teve sua vida totalmente restaurada! (" + this.pontosVidaMaximos + " PV)");
+    }
 }
