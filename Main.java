@@ -73,18 +73,16 @@ public class Main {
      */
     private static Personagem criarPersonagem() {
         System.out.println("Escolha sua classe:");
-        System.out.println("1. Bruxo (Disponível)");
-        System.out.println("2. Mago (Indisponível)");
-        System.out.println("3. Assassino (Disponível)");
+        System.out.println("1. Bruxo");
+        System.out.println("2. Mago");
+        System.out.println("3. Assassino");
         
         int classe = 0;
-        while (classe != 1 && classe != 3) {
+        while (classe < 1 || classe > 3) {
             System.out.print("Opção: ");
             classe = scanner.nextInt();
-            if (classe == 2) {
-                System.out.println("Classe indisponível. Por favor, escolha Bruxo.");
-            } else if (classe != 1 && classe != 3) {
-                System.err.println("Opção inválida. Escolha 1 ou 3!");
+            if (classe < 1 || classe > 3) {
+                System.err.println("Opção inválida. Escolha 1, 2 ou 3!");
             }
         }
         scanner.nextLine(); // Limpa o buffer do scanner
@@ -100,13 +98,17 @@ public class Main {
         mochila.adicionar(new Item("Trovoada", "Aumenta ataque em 5.", Efeito.BUFF_ATAQUE, 1));
 
         Personagem jogador = null;
-        if (classe == 1){
+        if (classe == 1) {
             // Bruxo(nome, pv, atqFísico, def, inventario, poderDeSinal)
             jogador = new Bruxo(nome, 120, 5, 14, mochila, 7);
             System.out.println("\n" + nome + ", o Bruxo, foi criado!");
+        } else if (classe == 2) {
+            // Mago(nome, pvMax, atq, def, inventario, poderMagico)
+            jogador = new Mago(nome, 80, 8, 10, mochila, 15);
+            System.out.println("\n" + nome + ", o Mago, foi criado!");
         } else if (classe == 3) {
             jogador = new Assassino(nome, 90, 8, 12, mochila, 12);
-            System.out.println("\n" + nome + ", O Assassino, foi criado!");
+            System.out.println("\n" + nome + ", o Assassino, foi criado!");
         }
         
         return jogador;
@@ -137,10 +139,13 @@ public class Main {
         if (jogador instanceof Bruxo) {
             // Converte o "Personagem" para "Bruxo" temporariamente
             Bruxo bruxo = (Bruxo) jogador;
-            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/");
-        }else if (jogador instanceof Assassino) {
+            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/8");
+        } else if (jogador instanceof Mago) {
+            Mago mago = (Mago) jogador;
+            System.out.print(" | Mana: " + mago.getMana() + "/100");
+        } else if (jogador instanceof Assassino) {
             Assassino assassino = (Assassino) jogador;
-            System.out.println(" | Stamina: " + assassino.getStamina());
+            System.out.print(" | Stamina: " + assassino.getStamina());
         }
         
         System.out.println("\n----------------------------------------");
@@ -163,6 +168,13 @@ public class Main {
             System.out.println("4. Lançar Quen (Custo: 2 Sinais)");
             System.out.println("5. Lançar Axii (Custo: 3 Sinais)"); 
             System.out.println("6. Usar Item");                     
+        } else if (jogador instanceof Mago) {
+            System.out.println("2. Espinhos Vermelhos Demoníacos (Custo: 20 Mana)");
+            System.out.println("3. Relâmpago de Plasma (Custo: 40 Mana)");
+            System.out.println("4. Trovão Aurora (Custo: 60 Mana)");
+            System.out.println("5. Explosão da Coroa Solar (Custo: 80 Mana)");
+            System.out.println("6. Ciclo das Seis Existências (Custo: 100 Mana)");
+            System.out.println("7. Usar Item");
         } else if (jogador instanceof Assassino) {
             System.out.println("2. Lançar Facas (Custo: 1 Stamina)");
             System.out.println("3. Atirar Besta (Custo: 2 Stamina)");
@@ -252,6 +264,63 @@ public class Main {
                 System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                 return true; // Turno concluído (gasto)
         }
+    } else if (jogador instanceof Mago) {
+        Mago mago = (Mago) jogador;
+        switch (escolha) {
+            case 1:
+                mago.atacar(inimigo);
+                return true;
+            case 2:
+                mago.EspinhosVermelhosDemoniacos(inimigo);
+                return true;
+            case 3:
+                mago.RelampagoDePlasma(inimigo);
+                return true;
+            case 4:
+                mago.TrovaoAurora(inimigo);
+                return true;
+            case 5:
+                mago.ExplosaoDaCoroaSolar(inimigo);
+                return true;
+            case 6:
+                mago.CicloDasSeisExistencias(inimigo);
+                return true;
+            case 7:
+                // Lógica de usar item (igual às outras classes)
+                List<Item> itens = mochila.listarOrdenado();
+                if (itens.isEmpty()) {
+                    System.out.println("...você não tem nada para usar.");
+                    return false;
+                }
+                
+                System.out.println("=== INVENTÁRIO ===");
+                for (int i = 0; i < itens.size(); i++) {
+                    Item item = itens.get(i);
+                    System.out.printf("%d. %s (%s) - %d unidades\n", 
+                        (i + 1), item.getNome(), item.getEfeito(), item.getQuantidade());
+                }
+                System.out.println("0. Voltar");
+                
+                System.out.print("\nEscolha o item (pelo número) ou 0 para voltar: ");
+                int escolhaItem = scanner.nextInt();
+                scanner.nextLine();
+
+                if (escolhaItem == 0) {
+                    System.out.println("Você guarda o item de volta na mochila.");
+                    return false;
+                } else if (escolhaItem > 0 && escolhaItem <= itens.size()) {
+                    Item itemEscolhido = itens.get(escolhaItem - 1);
+                    String nomeItem = itemEscolhido.getNome();
+                    mago.usarItem(nomeItem);
+                    return true;
+                } else {
+                    System.out.println("Número de item inválido!");
+                    return false;
+                }
+        default:
+            System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
+            return true;
+    }
     } else if (jogador instanceof Assassino) {
         Assassino assassino = (Assassino) jogador;
         switch (escolha) {
