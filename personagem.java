@@ -40,6 +40,15 @@ public abstract class Personagem {
     public int getDefesa() { return defesa; }
     public void setDefesa(int defesa) { this.defesa = defesa; }
     
+    /**
+     * Restaura a vida do personagem ao máximo.
+     * (Necessário para o Main.java)
+     */
+    public void curarTotalmente() {
+        this.pontosVida = this.pontosVidaMaximos;
+        System.out.println("❤️ " + this.getNome() + " teve sua vida totalmente restaurada! (" + this.pontosVidaMaximos + " PV)");
+    }
+    
     public void aplicarBuffDefesa(int valorBuff, int duracao) {
         // Só aplica o buff se não houver um ativo
         if (this.turnosBuffDefesa == 0) {
@@ -65,39 +74,39 @@ public abstract class Personagem {
         // Define ou reinicia a duração
         this.turnosDebuffGeral = duracao;
     }
+    
     // --- Métodos de combate ---
     public void atacar(Personagem inimigo) {
-    System.out.println("--- Turno de " + this.getNome() + " ---");
-    
-    // 1. ROLAGEM DE ATAQUE (Para Acertar)
-    int rolagemAtaque = this.d20.rolar() + this.getAtaque(); // d20 + Bônus de Ataque
-    System.out.println(this.getNome() + " ataca " + inimigo.getNome() + "!");
-    System.out.println("Rolagem de Ataque: (D20: " + (rolagemAtaque - this.getAtaque()) + 
-                       " + Bônus: " + this.getAtaque() + " = " + rolagemAtaque + ")");
+        System.out.println("--- Turno de " + this.getNome() + " ---");
+        
+        // 1. ROLAGEM DE ATAQUE (Para Acertar)
+        int rolagemAtaque = this.d20.rolar() + this.getAtaque(); // d20 + Bônus de Ataque
+        System.out.println(this.getNome() + " ataca " + inimigo.getNome() + "!");
+        System.out.println("Rolagem de Ataque: (D20: " + (rolagemAtaque - this.getAtaque()) + 
+                           " + Bônus: " + this.getAtaque() + " = " + rolagemAtaque + ")");
 
-    // 2. COMPARAÇÃO COM DEFESA
-    if (rolagemAtaque > inimigo.getDefesa()) {
-        System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
-        
-        // 3. ROLAGEM DE DANO (Se Acertou)
-        // Re-rolar o d20 para o dano + bônus de ataque
-        int danoBase = this.d20.rolar();
-        int danoTotal = danoBase + this.getAtaque();
-        System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
-        
-        // Aplica o dano ao alvo
-        inimigo.receberDano(danoTotal);
-        
-    } else {
-        System.out.println("ERROU! (Rolagem " + rolagemAtaque + " <= Defesa " + inimigo.getDefesa() + ")");
+        // 2. COMPARAÇÃO COM DEFESA
+        if (rolagemAtaque > inimigo.getDefesa()) {
+            System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
+            
+            // 3. ROLAGEM DE DANO (Se Acertou)
+            int danoBase = this.d20.rolar();
+            int danoTotal = danoBase + this.getAtaque();
+            System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
+            
+            // Aplica o dano ao alvo
+            inimigo.receberDano(danoTotal);
+            
+        } else {
+            System.out.println("ERROU! (Rolagem " + rolagemAtaque + " <= Defesa " + inimigo.getDefesa() + ")");
+        }
+        System.out.println("--------------------");
     }
-    System.out.println("--------------------");
-}
 
     protected void receberDano(int dano) {
         this.pontosVida -= dano;
         if (this.pontosVida < 0) this.pontosVida = 0;
-        System.out.println(this.nome + " recebeu " + dano + " de dano! Vida atual: " + pontosVida);
+        System.out.println(this.getNome() + " recebeu " + dano + " de dano! Vida atual: " + pontosVida);
     }
     
     public void receberCura(int cura) {
@@ -105,7 +114,7 @@ public abstract class Personagem {
         if (this.pontosVida > this.pontosVidaMaximos) {
             this.pontosVida = this.pontosVidaMaximos;
         }
-        System.out.println(this.nome + " curou " + cura + " PV! Vida atual: " + this.pontosVida);
+        System.out.println(this.getNome() + " curou " + cura + " PV! Vida atual: " + this.pontosVida);
    }
 
     public void usarItem(String nomeDoItem) {
@@ -184,8 +193,4 @@ public abstract class Personagem {
             }
         }
     }
-    public void curarTotalmente() {
-        this.pontosVida = this.pontosVidaMaximos;
-        System.out.println("❤️ " + this.getNome() + " teve sua vida totalmente restaurada! (" + this.pontosVidaMaximos + " PV)");
-    }
-}
+} 
