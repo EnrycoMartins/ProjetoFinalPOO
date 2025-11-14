@@ -12,7 +12,6 @@ public class Main {
         // CRIAÇÃO DO PERSONAGEM
         Personagem jogador = criarPersonagem();
 
-        // Diálogos com Pocho e Regis
         System.out.println("Ao chegar nos portões da vila, você encherga um multidão ao redor de um quadro de avisos.");
         aguardarEnter();
         System.out.println("Chegando mais perto é possivel ver um aldeão pregando um novo aviso no quadro...");
@@ -377,12 +376,7 @@ public class Main {
         System.out.println("\nObrigado por jogar!");
         scanner.close();
         
-    } // FIM DO MÉTODO MAIN
-    
-    // ==========================================================
-    // ===               MÉTODOS AUXILIARES (HELPERS)         ===
-    // ==========================================================
-    // (Estes métodos estão FORA do main, mas DENTRO da classe)
+    } 
 
     /**
      * Criação do personagem, seleção de classe e nome.
@@ -513,10 +507,6 @@ public class Main {
         return escolha;
     }
 
-    /**
-     * Executa a ação do jogador.
-     * @return 'true' se o turno foi concluído, 'false' se o jogador cancelou a ação.
-     */
     private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inimigo inimigo) {
         
         // --- LÓGICA DO BRUXO ---
@@ -572,10 +562,10 @@ public class Main {
                     return true;
             }
         }
-    } // <-- CORREÇÃO: Faltava esta chave para fechar o método
+    } 
 
     /**
-     * Método centralizado para lidar com o menu do inventário.
+     * Menu do inventário.
      */
     private static boolean lidarComInventario(Personagem jogador) {
         Inventario mochila = jogador.getInventario();

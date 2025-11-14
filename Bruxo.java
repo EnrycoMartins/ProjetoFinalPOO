@@ -37,7 +37,7 @@ public class Bruxo extends Personagem {
             return;
         }
 
-        // 2. Procurar primeiro por itens de SINAL
+        // Procurar primeiro por itens de SINAL
         Item itemDeSinal = null;
         for (Item item : itensEncontrados) {
             if (item.getEfeito() == Efeito.CURA_SINAL) {
@@ -46,7 +46,7 @@ public class Bruxo extends Personagem {
             }
         }
 
-        // 3. Se encontrou um item de Sinal, usa e encerra o método
+        // Se encontrou um item de Sinal, usa e encerra o método
         if (itemDeSinal != null) {
             System.out.println(this.getNome() + " usa " + itemDeSinal.getNome() + "!");
             this.restaurarSinal(itemDeSinal.getEfeito().getValor()); 
@@ -60,7 +60,7 @@ public class Bruxo extends Personagem {
     public void lancarIgni(Personagem inimigo) {
         System.out.println("--- Turno de " + this.getNome() + " ---");
         
-        // 1. VERIFICA SINAIS
+        // VERIFICA SINAIS
         if (this.pontosDeSinal < CUSTO_IGNI) {
             System.out.println(this.getNome() + " tentou usar Igni, mas não tem Sinais suficientes!");
             System.out.println(this.getNome() + " recorre a um ataque físico...");
@@ -73,12 +73,12 @@ public class Bruxo extends Personagem {
         System.out.println(this.getNome() + " lança o sinal Igni contra " + inimigo.getNome() + "!");
         System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
 
-        // 2. ROLAGEM DE ATAQUE(Para Acertar)
+        // ROLAGEM DE ATAQUE(Para Acertar)
         int rolagemAtaque = this.d20.rolar() + this.poderDeSinal; // d20 + Bônus de Poder de Sinal
         System.out.println("Rolagem de Ataque Mágico: (D20: " + (rolagemAtaque - this.poderDeSinal) + 
                            " + Poder: " + this.poderDeSinal + " = " + rolagemAtaque + ")");
 
-        // 3. COMPARAÇÃO COM DEFESA
+        // COMPARAÇÃO COM DEFESA
         if (rolagemAtaque > inimigo.getDefesa()) {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
@@ -97,7 +97,7 @@ public class Bruxo extends Personagem {
         System.out.println("--------------------");
     }
     public void lancarAard(Personagem inimigo) {
-        // 1. VERIFICA SINAIS
+        // VERIFICA SINAIS
         if (this.pontosDeSinal < CUSTO_AARD) {
             System.out.println(this.getNome() + " tentou usar Aard, mas não tem Sinais suficientes!");
             System.out.println(this.getNome() + " recorre a um ataque físico...");
@@ -110,16 +110,16 @@ public class Bruxo extends Personagem {
         System.out.println(this.getNome() + " lança o sinal aard contra " + inimigo.getNome() + "!");
         System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
 
-        // 2. ROLAGEM DE ATAQUE(Para Acertar)
+        // ROLAGEM DE ATAQUE(Para Acertar)
         int rolagemAtaque = this.d20.rolar() + this.poderDeSinal; // d20 + Bônus de Poder de Sinal
         System.out.println("Rolagem de Ataque Mágico: (D20: " + (rolagemAtaque - this.poderDeSinal) + 
                            " + Poder: " + this.poderDeSinal + " = " + rolagemAtaque + ")");
 
-        // 3. COMPARAÇÃO COM DEFESA
+        // COMPARAÇÃO COM DEFESA
         if (rolagemAtaque > inimigo.getDefesa()) {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
-            // 4. ROLAGEM DE DANO (Se Acertou)
+            // ROLAGEM DE DANO (Se Acertou)
             // Vamos rolar o d20 de novo para o dano + poder de sinal
             int danoBase = this.d20.rolar();
             int danoTotal = (danoBase + this.poderDeSinal) - 5 ;
@@ -134,23 +134,23 @@ public class Bruxo extends Personagem {
         System.out.println("--------------------");
     }
     public void lancarQuen() {
-        // 1. VERIFICA SINAIS
+        // VERIFICA SINAIS
         if (this.pontosDeSinal < CUSTO_QUEN) {
             System.out.println(this.getNome() + " tentou usar Quen, mas não tem Sinais suficientes!");
             System.out.println("A magia falha...");
             // O turno é gasto mesmo se falhar
             return; 
         }
-        // 2. GASTA SINAIS E APLICA O BUFF
+        // GASTA SINAIS E APLICA O BUFF
         this.pontosDeSinal -= CUSTO_QUEN;
         System.out.println(this.getNome() + " usa o sinal Quen!");
         System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
 
-        // 3. PEGA OS VALORES
+        // PEGA OS VALORES
         int valorBuff = Efeito.BUFF_DEFESA.getValor(); // Pega o valor 5 do Enum
         int duracao = 3; // O buff dura 2 turnos
 
-        // 4. CHAMA O MÉTODO DA CLASSE PAI
+        // CHAMA O MÉTODO DA CLASSE PAI
         // 'this' (Só o Bruxo) recebe o buff
         this.aplicarBuffDefesa(valorBuff, duracao);
         
@@ -160,23 +160,23 @@ public class Bruxo extends Personagem {
     public void lancarAxii(Personagem inimigo) {
         System.out.println("--- Turno de " + this.getNome() + " ---");
         
-        // 1. VERIFICA SINAIS (Corrigido para CUSTO_AXII)
+        // VERIFICA SINAIS 
         if (this.pontosDeSinal < CUSTO_AXII) {
             System.out.println(this.getNome() + " tentou usar Axii, mas não tem Sinais suficientes!");
             System.out.println("A magia falha...");
             return; // Turno gasto
         }
 
-        // 2. GASTA SINAIS
+        // GASTA SINAIS
         this.pontosDeSinal -= CUSTO_AXII;
         System.out.println(this.getNome() + " usa o sinal Axii contra " + inimigo.getNome() + "!");
         System.out.println("(Sinais restantes: " + this.pontosDeSinal + "/" + this.pontosDeSinalMaximo + ")");
 
-        // 3. DEFINE OS VALORES DO DEBUFF
+        // DEFINE OS VALORES DO DEBUFF
         int valorDebuff = -5; // O debuff de -5
         int duracao = 3;    // 3 turnos
 
-        // 4. CHAMA O MÉTODO NO INIMIGO (o alvo)
+        // Coloca o debuff no inimigo
         inimigo.aplicarDebuffGeral(valorDebuff, duracao);
         
         System.out.println("--------------------");

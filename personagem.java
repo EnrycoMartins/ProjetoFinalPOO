@@ -40,10 +40,9 @@ public abstract class Personagem {
     public int getDefesa() { return defesa; }
     public void setDefesa(int defesa) { this.defesa = defesa; }
     
-    /**
-     * Restaura a vida do personagem ao máximo.
-     * (Necessário para o Main.java)
-     */
+    
+    //Restaura a vida do personagem ao máximo.
+     
     public void curarTotalmente() {
         this.pontosVida = this.pontosVidaMaximos;
         System.out.println("❤️ " + this.getNome() + " teve sua vida totalmente restaurada! (" + this.pontosVidaMaximos + " PV)");

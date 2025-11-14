@@ -10,7 +10,7 @@ public class Mago extends Personagem {
     private final int CUSTO_EXPLOSAO = 80;
     private final int CUSTO_CICLO = 100;
 
-    // Construtor compatível com Personagem
+    // Construtor 
     public Mago(String nome, int pvMax, int atq, int def, Inventario inventario, int poderMagico) {
         super(nome, pvMax, atq, def, inventario);
         this.mana = MANA_MAXIMA;
