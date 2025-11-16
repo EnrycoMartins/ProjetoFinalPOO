@@ -625,7 +625,8 @@ public class Main {
             System.out.println("4. Trovão Aurora (Custo: 60 Mana)");
             System.out.println("5. Explosão da Coroa Solar (Custo: 80 Mana)");
             System.out.println("6. Ciclo das Seis Existências (Custo: 100 Mana)");
-            System.out.println("7. Usar Item");
+            System.out.println("7. Meditar (Recupera toda a Mana)");
+            System.out.println("8. Usar Item");
         } else if (jogador instanceof Assassino) {
             System.out.println("2. Lançar Facas (Custo: 1 Stamina)");
             System.out.println("3. Atirar Besta (Custo: 2 Stamina)");
@@ -668,7 +669,10 @@ public class Main {
                 case 4: mago.TrovaoAurora(inimigo); return true;
                 case 5: mago.ExplosaoDaCoroaSolar(inimigo); return true;
                 case 6: mago.CicloDasSeisExistencias(inimigo); return true;
-                case 7: return lidarComInventario(jogador); // Chama o inventário
+                case 7: 
+                mago.meditar();
+                return true;
+                case 8: return lidarComInventario(jogador); // Chama o inventário
                 default:
                     System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                     return true;
