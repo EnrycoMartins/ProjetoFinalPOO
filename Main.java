@@ -319,7 +319,7 @@ public class Main {
             ((Bruxo) jogador).restaurarSinaisTotalmente();
         } 
         else if (jogador instanceof Mago) {
-            ((Mago) jogador).descansar(); 
+            ((Mago) jogador).meditar(); 
         } 
         else if (jogador instanceof Assassino) {
             ((Assassino) jogador).restaurarStaminaTotalmente();
