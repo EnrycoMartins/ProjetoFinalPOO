@@ -22,7 +22,7 @@ public class Main {
         aguardarEnter();
         System.out.println("No papel está escrito: Monstro que perambula na floresta ao redor da vila já matou 20 moradores, recompensa de 1000 gilles para quem trouxer-me a cabeça da fera. Converse com Pocho na cabana do magistrado.");
         aguardarEnter();
-        System.out.println("A cabana do magistrado é o maior edifício da vila, lá é onde as politicas da vila acontecem");
+        System.out.println("A cabana do magistrado é o maior edifício da vila, lá é onde as politicas da vila acontecem.");
         aguardarEnter();
         System.out.println("Você está de frente para a cabana, uma construção robusta feita de pedra e madeira.");
         aguardarEnter();
@@ -74,13 +74,21 @@ public class Main {
         scanner.nextLine(); 
         if (escolha2 == 1){
             System.out.println("- Pelo que recebi, ele foi encontrado morto hoje de manhã perto das docas do leste.");
+            aguardarEnter();
+            System.out.println("- Antes desse, acharam uma criança. Provavelmente foi brincar na floresta sem ninguém ver e aconteceu oque aconteceu.");
         }else if(escolha2 == 2){
             System.out.println("- Não faço ideia, não conheço monstros e os moradores também não.");
+            aguardarEnter();
+            System.out.println("- Antes dessa maldita guerra, monstros quase nunca apareciam por aqui.");
+            aguardarEnter();
+            System.out.println("- Mas deve ser um bem agressivo, ataca tudo que vé");
         }else{
             System.out.println("- Pelo que os soldados relataram, a grande maioria estavam completamente destroçados, só eram reconhecidos por suas roupas.");
+            aguardarEnter();
+            System.out.println("- Bom, eu não conseguiria detalhar muito, afinal fiz questão de não olhar para os corpos.");
         }
         aguardarEnter();
-        System.out.println("- Bom, isso é tudo que sei. Se quiser saber detalhes do cadáver ou do local, vá falar com Regis o pescador que encontrou o coitado hoje de manhã. Ele sempre veste um gibão verde, não deve ser dificil de achar.");
+        System.out.println("- Bom, isso é tudo que sei. Se quiser saber detalhes do cadáver ou do local, vá falar com Regis o pescador que encontrou o coitado hoje de manhã. Vá até as docas do leste. Ele sempre veste um gibão verde, não deve ser dificil de achar.");
         aguardarEnter();
         System.out.println("- Agora saia daqui, tenho muita coisa pra fazer.");
         aguardarEnter();
@@ -115,8 +123,14 @@ public class Main {
         scanner.nextLine(); 
         if (escolha3 == 1){
             System.out.println("- Eu o achei jogado perto da beira do rio hoje de manhã. Estava bem cedo, achei que meus olhos ainda estavam acordando.");
+            aguardarEnter();
+            System.out.println("- Eu tinha acordado cedo como sempre e foi pescar algumas tilapias. Joguei a rede e peguei algums peixes, quando retornei vi alguma coisa boiando perto das margens.");
+            aguardarEnter();
+            System.out.println("- Reconheci o pobre coitado, ele era filho de um dos caçadores da vila, era um bom garoto. Fico triste pelo pai dele.");
         }else{
             System.out.println("- Estava horrível, tenho 43 anos e nunca tinha visto isso. O peito do homem estava tão aberto que era possivel ver do outro lado, seus braços sendo segurados apenas pelos ossos e partido da cintura para baixo");
+            aguardarEnter();
+            System.out.println("- Eu não tenho ideia de que tipo de criatura fez isso, mas não é algo que deveria viver perto das pessoas.");
         }
         aguardarEnter();
         System.out.println("- Suponho que vai perseguir a fera independente do eu digo, então procure ao redor do rio nas proximidades da floresta fora da vila, provavelmente terá algo lá.");
@@ -138,11 +152,11 @@ public class Main {
         System.out.println("Mas antes que fosse seguí-lo, você escuta movimentação no rio atras de vocé.");
         aguardarEnter();
         
-        // 3. CRIAÇÃO DO INIMIGO 
+        // CRIAÇÃO DO INIMIGO 
         Inimigo afogador = criarAfogador();
 
-        // 4. LOOP DE COMBATE 
-        System.out.println("\n--- A BATALHA (1) COMEÇA! ---");
+        // LOOP DE COMBATE 
+        System.out.println("\n--- A BATALHA COMEÇA! ---");
         
         boolean emCombate = true;
         boolean jogadorVenceu = false; 
@@ -168,7 +182,7 @@ public class Main {
             afogador.decidirAcao(jogador);
             
             if (jogador.getPontosdeVida() <= 0) {
-                System.out.println("\n💀 " + jogador.getNome() + " foi derrotado... Fim de Jogo. 💀");
+                System.out.println("\n💀 " + jogador.getNome() + " virou comida de necrófago... Fim de Jogo. 💀");
                 emCombate = false; 
             }
 
@@ -195,7 +209,7 @@ public class Main {
             // Se o jogador perdeu a primeira batalha, encerra o jogo.
             System.out.println("\nObrigado por jogar!");
             scanner.close();
-            return; // Encerra o método main
+            return; // Encerra o main
         }
         
         System.out.println("Voltando ao rastro de sangue, você percebe que ele vai em direção ao interior da floresta.");
@@ -214,11 +228,11 @@ public class Main {
         aguardarEnter();
         System.out.println("Se aproximando do cheiro você encontra um bando de carniçais devorando a origem do cheiro. Um corpo de um soldado.");
 
-        // 7. CRIAÇÃO DO INIMIGO 2
+        // CRIAÇÃO DO INIMIGO 2
         Inimigo carnical = criarCarnical();
 
-        // 8. LOOP DE COMBATE 
-        System.out.println("\n--- A BATALHA (2) COMEÇA! ---");
+        // LOOP DE COMBATE 
+        System.out.println("\n--- A BATALHA COMEÇA! ---");
         
         emCombate = true; 
         jogadorVenceu = false; 
@@ -244,7 +258,7 @@ public class Main {
             carnical.decidirAcao(jogador);
             
             if (jogador.getPontosdeVida() <= 0) {
-                System.out.println("\n💀 " + jogador.getNome() + " foi derrotado... Fim de Jogo. 💀");
+                System.out.println("\n💀 " + jogador.getNome() + " virou comida de necrófago... Fim de Jogo. 💀");
                 emCombate = false; 
             }
 
@@ -296,10 +310,10 @@ public class Main {
         System.out.println("...");
         System.out.println("Você medita e prepara suas poções...");
         
-        // 1. Cura o HP 
+        // Cura o HP 
         jogador.curarTotalmente();
         
-        // 2. Restaura o Recurso Específico 
+        // Restaura o Recurso Específico 
         if (jogador instanceof Bruxo) {
             ((Bruxo) jogador).restaurarSinaisTotalmente();
         } 
@@ -328,8 +342,8 @@ public class Main {
 
         Inimigo chorabash = criarChorabash();
 
-        // 8. LOOP DE COMBATE 
-        System.out.println("\n--- A BATALHA (3) COMEÇA! ---");
+        // LOOP DE COMBATE 
+        System.out.println("\n--- A BATALHA COMEÇA! ---");
         
         emCombate = true; 
         jogadorVenceu = false; 
@@ -337,7 +351,7 @@ public class Main {
         while (emCombate) {
             jogador.processarBuffs(); 
             exibirStatus(jogador, chorabash); 
-            int escolha = exibirOpcoesJogador(jogador); // Corrigido na última vez
+            int escolha = exibirOpcoesJogador(jogador); 
             boolean turnoConcluido = executarAcaoJogador(escolha, jogador, chorabash); 
 
             if (!turnoConcluido) { continue; }
@@ -355,32 +369,144 @@ public class Main {
             chorabash.decidirAcao(jogador);
             
             if (jogador.getPontosdeVida() <= 0) {
-                System.out.println("\n💀 " + jogador.getNome() + " foi derrotado... Fim de Jogo. 💀");
+                System.out.println("\n💀 " + jogador.getNome() + " virou comida de necrófago.. Fim de Jogo. 💀");
                 emCombate = false; 
             }
 
             if (emCombate) { aguardarEnter(); }
         } // FIM DO COMBATE 
 
-        // LOOT
+        // LOOT    mochila.adicionar(new Item("Poção de Cura Superior", "Restaura 50 PV.", Efeito.SUPERCURA, 1));
+
         if (jogadorVenceu) {
             System.out.println("Você consegue derrotar a fera ancestral!");
             aguardarEnter();
             Inventario mochilaDoJogador = jogador.getInventario();
-            Item pocaoAtaque = new Item("Poção de Ataque", "Aumenta ataque em 5.", Efeito.BUFF_ATAQUE, 3);
+            Item pocaoAtaque = new Item("Poção de Ataque", "Aumenta ataque em 3.", Efeito.BUFF_ATAQUE, 1);
+            Item pocaoCURASuperior = new Item("Poção de Cura Superior", "Restaura 50 PV.", Efeito.SUPERCURA, 2);
             mochilaDoJogador.adicionar(pocaoAtaque);
-            System.out.println("✨ Você coleta [Cabeça de Chorabash] e cria uma [Poção de Ataque]! ✨");
+            mochilaDoJogador.adicionar(pocaoCURASuperior);
+            System.out.println("Você coleta [Chifre de Chorabash] e cria uma [Poção de Ataque]! ");
+            System.out.println("Você coleta [Terceiro do Olho de Chorabash] e cria uma [Poção de Cura Superior]! ");
         }
+        aguardarEnter();
+        System.out.println("O corpo gigante da criatura despenca ao chão enquanto o monstro dá seu ultimo rugido, levantando uma onda de poeira!");
+        aguardarEnter();
+        System.out.println("Com a adrenalina abaixando, você observa o monstro falecido.");
+        aguardarEnter();
+        System.out.println("Você ainda se pergunta como conseguiu derrotar uma coisa dessas.");
+        aguardarEnter();
+        System.out.println("Todo treinamento que teve se mostrou muito util hoje.");
+        aguardarEnter();
+        System.out.println("Agora é arrancar a cabeça do monstro e levar como prova.");
+        aguardarEnter();
+        System.out.println("Usando uma faca, você corta através dos musculos do pescoço.");
+        aguardarEnter();
+        System.out.println("A faca para no osso, é muito resistente.");
+        aguardarEnter();
+        System.out.println("Colocando uma mão sobre as costas da faca, você empurra ela pra baixo com o peso do seu corpo!");
+        aguardarEnter();
+        System.out.println("A cabeça é desconectada e você a coloca em uma bolsa grande.");
+        aguardarEnter();
+        System.out.println("Saindo da caverna, você se depera com uma visita inesperada.");
+        aguardarEnter();
+        System.out.println("Um grupo de bandidos te espera fora.");
+        aguardarEnter();
+        System.out.println("Ao te verem, o lider deles diz:");
+        aguardarEnter();
+        System.out.println("- Viram rapazes? Eu disse que isso ia dar certo!");
+        aguardarEnter();
+        System.out.println("- Olha aqui mercenariozinho. Nós de a cabeça do monstro e te pouparemos!");
+        aguardarEnter();
+        System.out.println("- Escolha");
+        System.out.println("1) Eu matei um Chorabash, acho mesmo que tem força para me obrigar a fazer algo?");
+        System.out.println("2) Se não quiserem terminar como o monstro, deem meia volta, não vou falar denovo...");
+        System.out.println("Digite uma opção:");
+        int escolha4 = scanner.nextInt();
+        scanner.nextLine(); 
+        if (escolha4 == 1){
+            System.out.println("- Depois de uma luta dessa você provavelmente está cansado!");
+            aguardarEnter();
+            System.out.println("- Já que não vai colaborar, vamos te esfolar inteiro e pegar a recompensa!");
+            aguardarEnter();
+            System.out.println("- Pra cima dele rapazes!");
+            aguardarEnter();
+            Inimigo bandidos = criarBandidos();
 
+            // LOOP DE COMBATE 
+            System.out.println("\n--- A BATALHA COMEÇA! ---");
+            
+            emCombate = true; 
+            jogadorVenceu = false; 
+            
+            while (emCombate) {
+                jogador.processarBuffs(); 
+                exibirStatus(jogador, bandidos); 
+                int escolha = exibirOpcoesJogador(jogador); 
+                boolean turnoConcluido = executarAcaoJogador(escolha, jogador, bandidos); 
 
+                if (!turnoConcluido) { continue; }
+                
+                if (bandidos.getPontosdeVida() <= 0) {
+                    System.out.println("\n🎉 Você derrotou " + bandidos.getNome() + "! 🎉");
+                    emCombate = false;
+                    jogadorVenceu = true; 
+                    continue; 
+                }
+
+                aguardarEnter();
+
+                bandidos.processarBuffs(); 
+                bandidos.decidirAcao(jogador);
+                
+                if (jogador.getPontosdeVida() <= 0) {
+                    System.out.println("\n💀 " + jogador.getNome() + " virou comida de necrófago.. Fim de Jogo. 💀");
+                    emCombate = false; 
+                }
+
+                if (emCombate) { aguardarEnter(); }
+            } // FIM DO COMBATE   
+
+             System.out.println("Esses caras realmente pensaram que tinha chance?");
+             aguardarEnter();
+             System.out.println("Deixe que os necrófagos façam o resto. Hora de pegar a recompensa.");
+             aguardarEnter();
+             System.out.println("Voltando a vila de manhã, os moradores olha você carregando a grande bolsa pingado sangue e cochichando entre sí");
+             aguardarEnter();
+             System.out.println("Você vé POCHO ao lado da porta da cabana do Magistrado. Ele chega perto e diz:");
+             aguardarEnter();
+             System.out.println("- Ora ora e pensar que você não só sobreviveu mas como matou a fera!");
+             aguardarEnter();
+             System.out.println("- Devo admitir que te subestimei, aqui está o seu dinheiro! Se tivermos outro monstro causando problemas, vamos te chamar denovo.");
+             aguardarEnter();
+             System.out.println("Ele te arremessa um saco de moedas, você ganhou 1000 gilles assim como prometido.");
+             aguardarEnter();
+             System.out.println("Você ascena com a cabeça e parte para sua proxima aventura.");
+            }else{
+                System.out.println("- Que droga!!! Ele nem parece cansado, vamos embora!");
+                aguardarEnter();
+                System.out.println("Os bandidos fogem intimidados.");
+                aguardarEnter();
+                System.out.println("Voltando a vila de manhã, os moradores olha você carregando a grande bolsa pingado sangue e cochichando entre sí");
+                aguardarEnter();
+                System.out.println("Você vé POCHO ao lado da porta da cabana do Magistrado. Ele chega perto e diz:");
+                aguardarEnter();
+                System.out.println("- Ora ora e pensar que você não só sobreviveu mas como matou a fera!");
+                aguardarEnter();
+                System.out.println("- Devo admitir que te subestimei, aqui está o seu dinheiro! Se tivermos outro monstro causando problemas, vamos te chamar denovo.");
+                aguardarEnter();
+                System.out.println("Ele te arremessa um saco de moedas, você ganhou 1000 gilles assim como prometido.");
+                aguardarEnter();
+                System.out.println("Você ascena com a cabeça e parte para sua proxima aventura.");
+            }
+            
         System.out.println("\nObrigado por jogar!");
         scanner.close();
         
     } 
 
-    /**
-     * Criação do personagem, seleção de classe e nome.
-     */
+    // Criação do personagem, seleção de classe e nome.
+     
     private static Personagem criarPersonagem() {
         System.out.println("Escolha sua classe:");
         System.out.println("1. Bruxo (Disponível)");
@@ -402,8 +528,9 @@ public class Main {
 
         Inventario mochila = new Inventario();
         mochila.adicionar(new Item("Poção de Cura", "Restaura 25 PV.", Efeito.CURA, 3));
-        mochila.adicionar(new Item("Andorinha", "Restaura 2 Sinais.", Efeito.CURA_SINAL, 2));
-        mochila.adicionar(new Item("Poção de Ataque", "Aumenta ataque em 5.", Efeito.BUFF_ATAQUE, 1)); 
+        mochila.adicionar(new Item("Poção de Cura Superior", "Restaura 50 PV.", Efeito.SUPERCURA, 1));
+        mochila.adicionar(new Item("Andorinha", "Restaura 4 Sinais.", Efeito.CURA_SINAL, 2));
+        mochila.adicionar(new Item("Poção de Ataque", "Aumenta ataque em 3.", Efeito.BUFF_ATAQUE, 1)); 
 
         Personagem jogador = null;
         if (classe == 1) {
@@ -420,7 +547,7 @@ public class Main {
         return jogador;
     }
 
-   //Cria o Afogador
+   // Cria o Afogador
     private static Inimigo criarAfogador() {
         Inventario mochilaAfogador = new Inventario();
         Inimigo inimigo = new Inimigo("Afogador", 50, 4, 12, mochilaAfogador);
@@ -430,34 +557,41 @@ public class Main {
         return inimigo;
     }
 
-   //Cria os carniçais
+   // Cria os carniçais
     private static Inimigo criarCarnical() {
         Inventario mochilaCarnical = new Inventario(); 
-        Inimigo inimigo2 = new Inimigo("Bando de Carniçais", 80, 4, 12, mochilaCarnical);
+        Inimigo inimigo2 = new Inimigo("Bando de Carniçais", 80, 6, 13, mochilaCarnical);
         System.out.println("\nOs carniçais notam sua presença!");
         System.out.println("O " + inimigo2.getNome() + " avança em sua direção!");
         return inimigo2;
     }
 
+    // Cria o Chorabash
     private static Inimigo criarChorabash() {
         Inventario mochilaChorabash = new Inventario(); 
-        Inimigo inimigo3 = new Inimigo("Chorabash", 140, 6, 14, mochilaChorabash);
+        Inimigo inimigo3 = new Inimigo("Chorabash", 140, 8, 15, mochilaChorabash);
         System.out.println("\nO Chorabash Ruge!");
         System.out.println(inimigo3.getNome() + " avança em sua direção!");
         return inimigo3;
     }
 
+    private static Inimigo criarBandidos() {
+        Inventario mochilaBandidos = new Inventario(); 
+        Inimigo inimigo4 = new Inimigo("Grupo de Bandidos", 60, 4, 14, mochilaBandidos);
+        System.out.println(inimigo4.getNome() + " avança em sua direção!");
+        return inimigo4;
+    }
 
-    /**
-     * Mostra o HP do jogador e do inimigo.
-     */
+
+    // Mostra o HP do jogador e do inimigo.
+     
     private static void exibirStatus(Personagem jogador, Inimigo inimigo) {
         System.out.println("\n========================================");
         System.out.print("👤 " + jogador.getNome() + " | HP: " + jogador.getPontosdeVida()+" | Defesa: " + jogador.getDefesa());
         
         if (jogador instanceof Bruxo) {
             Bruxo bruxo = (Bruxo) jogador;
-            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/8");
+            System.out.print(" | Sinais: " + bruxo.getPontosDeSinal() + "/10");
         } else if (jogador instanceof Mago) {
             Mago mago = (Mago) jogador;
             System.out.print(" | Mana: " + mago.getMana() + "/100");
@@ -471,9 +605,9 @@ public class Main {
         System.out.println("========================================");
     }
 
-    /**
-     * Mostra as opções de ação do jogador e retorna a escolha.
-     */
+    
+    // Mostra as opções de ação do jogador e retorna a escolha.
+     
     private static int exibirOpcoesJogador(Personagem jogador) {
         System.out.println("É seu turno. O que fazer?");
         System.out.println("1. Atacar"); // Ataque base
@@ -509,7 +643,7 @@ public class Main {
 
     private static boolean executarAcaoJogador(int escolha, Personagem jogador, Inimigo inimigo) {
         
-        // --- LÓGICA DO BRUXO ---
+        // --- AÇÕES BRUXO ---
         if (jogador instanceof Bruxo) {
             Bruxo bruxo = (Bruxo) jogador;
             switch (escolha) {
@@ -518,12 +652,12 @@ public class Main {
                 case 3: bruxo.lancarAard(inimigo); return true;
                 case 4: bruxo.lancarQuen(); return true; 
                 case 5: bruxo.lancarAxii(inimigo); return true; 
-                case 6: return lidarComInventario(jogador); // Chama o método de inventário
+                case 6: return lidarComInventario(jogador); // Chama o inventário
                 default:
                     System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                     return true;
             }
-        // --- LÓGICA DO MAGO ---
+        // --- AÇÕES MAGO ---
         } else if (jogador instanceof Mago) {
             Mago mago = (Mago) jogador;
             switch (escolha) {
@@ -533,12 +667,12 @@ public class Main {
                 case 4: mago.TrovaoAurora(inimigo); return true;
                 case 5: mago.ExplosaoDaCoroaSolar(inimigo); return true;
                 case 6: mago.CicloDasSeisExistencias(inimigo); return true;
-                case 7: return lidarComInventario(jogador); // Chama o método de inventário
+                case 7: return lidarComInventario(jogador); // Chama o inventário
                 default:
                     System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                     return true;
             }
-        // --- LÓGICA DO ASSASSINO ---
+        // --- AÇÕES ASSASSINO ---
         } else if (jogador instanceof Assassino) {
             Assassino assassino = (Assassino) jogador;
             switch (escolha) {
@@ -547,12 +681,12 @@ public class Main {
                 case 3: assassino.AtirarBestaLaminadoCaos(inimigo); return true;
                 case 4: assassino.AtaqueComBombaDeFumaca(inimigo); return true;
                 case 5: assassino.EstocadaPescocoLaminadoCaos(inimigo); return true;
-                case 6: return lidarComInventario(jogador); // Chama o método de inventário
+                case 6: return lidarComInventario(jogador); // Chama o inventário
                 default:
                     System.out.println("Opção inválida! Você gaguejou e perdeu o turno.");
                     return true;
             }
-        // --- LÓGICA PADRÃO ---
+        // --- AÇÕES COMUM---
         } else { 
             switch (escolha) {
                 case 1: jogador.atacar(inimigo); return true;
@@ -564,9 +698,9 @@ public class Main {
         }
     } 
 
-    /**
-     * Menu do inventário.
-     */
+    
+    // Menu do inventário.
+     
     private static boolean lidarComInventario(Personagem jogador) {
         Inventario mochila = jogador.getInventario();
         List<Item> itens = mochila.listarOrdenado();
@@ -603,9 +737,9 @@ public class Main {
         }
     }
 
-    /**
-     * Imprime a história de introdução.
-     */
+    
+    // Imprime a história de introdução.
+     
     private static void imprimirIntroducao() {
         System.out.println("========================================");
         System.out.println(" BEM-VINDO AO PROJETO DE RPG");
@@ -618,9 +752,9 @@ public class Main {
         System.out.println("----------------------------------------");
     }
 
-    /**
-     * Pausa o jogo e espera o jogador pressionar Enter.
-     */
+    
+    // Pausa o jogo e espera o jogador pressionar Enter.
+     
     private static void aguardarEnter() {
         System.out.println("\n(Pressione Enter para continuar...)");
         scanner.nextLine();

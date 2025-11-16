@@ -66,9 +66,9 @@ public abstract class Personagem {
             this.valorDebuffGeral = valorDebuff; // Salva o valor (ex: -5)
             this.setAtaque(this.getAtaque() + valorDebuff); // atk + (-5)
             this.setDefesa(this.getDefesa() + valorDebuff); // def + (-5)
-            System.out.println("😵 " + this.getNome() + " é afetado por Axii! Ataque e Defesa -" + Math.abs(valorDebuff) + "!");
+            System.out.println("😵 " + this.getNome() + " é afetado por Status Negativo! Ataque e Defesa -" + Math.abs(valorDebuff) + "!");
         } else {
-            System.out.println("😵 " + this.getNome() + " renova o debuff de Axii!");
+            System.out.println("😵 " + this.getNome() + " renova o debuff!");
         }
         // Define ou reinicia a duração
         this.turnosDebuffGeral = duracao;
@@ -127,7 +127,7 @@ public abstract class Personagem {
         Item itemParaUsar = null;
         for (Item item : itensEncontrados) {
             Efeito ef = item.getEfeito();
-            if (ef == Efeito.CURA || ef == Efeito.BUFF_ATAQUE || ef == Efeito.BUFF_DEFESA) {
+            if (ef == Efeito.CURA || ef == Efeito.BUFF_ATAQUE || ef == Efeito.BUFF_DEFESA||ef==Efeito.SUPERCURA) {
                 itemParaUsar = item; 
                 break; 
             }
@@ -146,6 +146,9 @@ public abstract class Personagem {
             case CURA:
                 this.receberCura(valor);
                 break;
+            case SUPERCURA:
+                this.receberCura(valor);
+                break;
             case BUFF_ATAQUE:
                 this.setAtaque(this.getAtaque() + valor);
                 System.out.println(this.getNome() + " sente seu ataque aumentar! (Ataque: " + this.getAtaque() + ")");
@@ -162,7 +165,7 @@ public abstract class Personagem {
     }
 
     public void processarBuffs() {
-        // --- Processa Buff de Defesa  ---
+        // --- Buff de Defesa  ---
         if (this.turnosBuffDefesa > 0) {
             this.turnosBuffDefesa--; // Reduz a duração
 
@@ -176,7 +179,7 @@ public abstract class Personagem {
             }
         }
 
-        // --- Processa Debuff Geral  ---
+        // --- Debuff Geral  ---
         if (this.turnosDebuffGeral > 0) {
             this.turnosDebuffGeral--; // Reduz a duração
 

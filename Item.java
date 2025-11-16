@@ -2,13 +2,11 @@ import java.util.Objects;
 
 public class Item implements Comparable<Item> {
 
-    // --- Atributos ---
     private String nome;
     private String descricao;
     private Efeito efeito;
     private int quantidade;
 
-    // --- Construtor ---
     public Item(String nome, String descricao, Efeito efeito, int quantidade) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
@@ -49,7 +47,7 @@ public class Item implements Comparable<Item> {
         return quantidade;
     }
 
-    // Setter para quantidade com a validação
+    // Setter para quantidade
     public void setQuantidade(int quantidade) {
         if (quantidade < 0) {
             throw new IllegalArgumentException("A quantidade não pode ser negativa.");

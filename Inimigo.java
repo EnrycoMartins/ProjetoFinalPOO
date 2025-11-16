@@ -22,17 +22,17 @@ public class Inimigo extends Personagem {
         System.out.println("--- Turno de " + this.getNome() + " ---");
         System.out.println(this.getNome() + " usa um ATAQUE FORTE!");
         
-        // 1. ROLAGEM DE ATAQUE (com bônus de fúria)
+        // ROLAGEM DE ATAQUE (com bônus de fúria)
         int rolagemAtaque = this.d20.rolar() + this.getAtaque() + this.bonusFuria;
         
         System.out.println("Rolagem de Ataque: (D20: " + (rolagemAtaque - this.getAtaque() - this.bonusFuria) + 
                            " + Bônus: " + this.getAtaque() + " + Fúria: " + this.bonusFuria + " = " + rolagemAtaque + ")");
 
-        // 2. COMPARAÇÃO COM DEFESA
+        // COMPARAÇÃO COM DEFESA
         if (rolagemAtaque > player.getDefesa()) {
             System.out.println("ACERTOU COM FÚRIA!");
             
-            // 3. ROLAGEM DE DANO (também com bônus)
+            // ROLAGEM DE DANO (também com bônus)
             int danoBase = this.d20.rolar();
             int danoTotal = danoBase + this.getAtaque() + this.bonusFuria;
             System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " + Fúria: " + this.bonusFuria + " = " + danoTotal + " de dano)");

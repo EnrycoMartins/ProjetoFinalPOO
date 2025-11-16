@@ -3,7 +3,7 @@ import java.util.List;
 public class Bruxo extends Personagem {
 
     private int pontosDeSinal;
-    private final int pontosDeSinalMaximo = 8; 
+    private final int pontosDeSinalMaximo = 10; 
     private int poderDeSinal; 
     private final int CUSTO_IGNI = 2; 
     private final int CUSTO_AARD = 1;
@@ -46,7 +46,7 @@ public class Bruxo extends Personagem {
             }
         }
 
-        // Se encontrou um item de Sinal, usa e encerra o método
+        // Se encontrou um item de Sinal, usa e encerra 
         if (itemDeSinal != null) {
             System.out.println(this.getNome() + " usa " + itemDeSinal.getNome() + "!");
             this.restaurarSinal(itemDeSinal.getEfeito().getValor()); 
@@ -82,13 +82,13 @@ public class Bruxo extends Personagem {
         if (rolagemAtaque > inimigo.getDefesa()) {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
-            // 4. ROLAGEM DE DANO (Se Acertou)
-            // Vamos rolar o d20 de novo para o dano + poder de sinal
+            // ROLAGEM DE DANO (Se Acertou)
+            // Rola o d20 de novo para o dano + poder de sinal
             int danoBase = this.d20.rolar();
-            int danoTotal = danoBase + this.poderDeSinal;
-            System.out.println("Dano de Fogo: (D20: " + danoBase + " + Poder: " + this.poderDeSinal + " = " + danoTotal + " de dano)");
+            int danoTotal = danoBase + this.poderDeSinal + 6;
+            System.out.println("Dano de Fogo: (D20: " + danoBase + " + Poder: " + this.poderDeSinal +" + 6 "+ " = " + danoTotal + " de dano)");
             
-            // Aplica o dano ao inimigo
+            // Aplica o dano no inimigo
             inimigo.receberDano(danoTotal);
 
         } else {
@@ -120,10 +120,10 @@ public class Bruxo extends Personagem {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
             // ROLAGEM DE DANO (Se Acertou)
-            // Vamos rolar o d20 de novo para o dano + poder de sinal
+            // Rola o d20 de novo para o dano + poder de sinal
             int danoBase = this.d20.rolar();
-            int danoTotal = (danoBase + this.poderDeSinal) - 5 ;
-            System.out.println("Dano de Vento: (D20: " + danoBase + " + Poder: " + this.poderDeSinal + " = " + danoTotal + " de dano)");
+            int danoTotal = (danoBase + this.poderDeSinal + 3);
+            System.out.println("Dano de Vento: (D20: " + danoBase + " + Poder: " + this.poderDeSinal +" + 3 "+ " = " + danoTotal + " de dano)");
             
             // Aplica o dano ao inimigo
             inimigo.receberDano(danoTotal);
@@ -150,8 +150,7 @@ public class Bruxo extends Personagem {
         int valorBuff = Efeito.BUFF_DEFESA.getValor(); // Pega o valor 5 do Enum
         int duracao = 3; // O buff dura 2 turnos
 
-        // CHAMA O MÉTODO DA CLASSE PAI
-        // 'this' (Só o Bruxo) recebe o buff
+        // Só o Bruxo recebe o buff
         this.aplicarBuffDefesa(valorBuff, duracao);
         
         System.out.println("--------------------");
