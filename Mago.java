@@ -168,9 +168,10 @@ public class Mago extends Personagem {
         System.out.println("--------------------");
     }
     
-    public void descansar() {
-        this.mana = MANA_MAXIMA;
-        System.out.println(getNome() + " descansou e recuperou toda a mana!");
+    public void meditar() {
+    this.mana = MANA_MAXIMA;
+    System.out.println(getNome() + " entra em estado de meditação profunda...");
+    System.out.println("🧘 " + getNome() + " recuperou toda a mana! (" + MANA_MAXIMA + "/" + MANA_MAXIMA + ")");
     }
     
     public int getMana() {
