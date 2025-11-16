@@ -12,23 +12,23 @@ public class Main {
         // CRIAÇÃO DO PERSONAGEM
         Personagem jogador = criarPersonagem();
 
-        System.out.println("Ao chegar nos portões da vila, você encherga um multidão ao redor de um quadro de avisos.");
+        System.out.println("Ao chegar nos portões da vila, você enxerga um multidão ao redor de um quadro de avisos.");
         aguardarEnter();
         System.out.println("Chegando mais perto é possivel ver um aldeão pregando um novo aviso no quadro...");
         aguardarEnter();
         System.out.println("Seus ouvidos são tomados por uma maré sonora vinda das milhares de vozes ao seu redor.");
         aguardarEnter();
-        System.out.println("Os Aldeões estão furiosos, após se espremer pela multidão para chegar perto ao quadro, você consegue ler o aviso recém pregado.");
+        System.out.println("Os Aldeões estão furiosos, após se espremer pela multidão para chegar perto do quadro, você consegue ler o aviso recém pregado");
         aguardarEnter();
-        System.out.println("No papel está escrito: Monstro que perambula na floresta ao redor da vila já matou 20 moradores, recompensa de 1000 gilles para quem trouxer-me a cabeça da fera. Converse com Pocho na cabana do magistrado.");
+        System.out.println("No papel está escrito: Monstro que perambula na floresta ao redor da vila já matou 20 moradores, recompensa de 1000 gilles para quem me trouxer a cabeça da fera. Converse com Pocho na cabana do magistrado.");
         aguardarEnter();
-        System.out.println("A cabana do magistrado é o maior edifício da vila, lá é onde as politicas da vila acontecem.");
+        System.out.println("A cabana do magistrado é o maior edifício da vila, onde as políticas da vila acontecem.");
         aguardarEnter();
         System.out.println("Você está de frente para a cabana, uma construção robusta feita de pedra e madeira.");
         aguardarEnter();
         System.out.println("Ao bater na porta, você escuta barulho de passos atrás da porta...");
         aguardarEnter();
-        System.out.println("Uma voz ecoa atraves da porta:");
+        System.out.println("Uma voz ecoa através da porta:");
         aguardarEnter();
         System.out.println("- O que é?");
         System.out.println("1) Eu vim pelo aviso!");
@@ -40,24 +40,24 @@ public class Main {
         if (escolha1 == 1){
             System.out.println("Veio é? Pode entrar.");
         }else if(escolha1 == 2){
-            System.out.println("Eu não preciso saber seu nome agora, é bem provavel que você morra mesmo, mas pode entrar.");
+            System.out.println("Eu não preciso saber seu nome agora, é bem provável que você morra mesmo, mas pode entrar.");
         }else{
-            System.out.println("Muitos quiseram, e muitos estão debaixo da terra desde então. Se tem pouco valor a sua vida, pode entrar.");
+            System.out.println("Muitos quiseram, e muitos estão debaixo da terra desde então. Se a sua vida tem pouco valor, pode entrar.");
         }
         aguardarEnter();
-        System.out.println("Ao entrar na cabana, você se depara com um homem que provavelmente já passou por várias experiencias durante a vida");
+        System.out.println("Ao entrar na cabana, você se depara com um homem que provavelmente já passou por várias experiências durante a vida.");
         aguardarEnter();
-        System.out.println("Um sujeito calvo com alguns fios brancos, tem uma barba branca gigante, a barba é grande o bastante pra esconder uma adaga.");
+        System.out.println("Um sujeito calvo com alguns fios brancos tem uma barba branca gigante, grande o bastante pra esconder uma adaga.");
         aguardarEnter();
         System.out.println("O homem velho te olha nos olhos e fala:");
         aguardarEnter();
         System.out.println("- Meu nome é POCHO, sou o vice magistrado.");
         aguardarEnter();
-        System.out.println("- Eu cuido de assuntos que o Magistrado não se pode dar ao luxo de perder tempo.");
+        System.out.println("- Eu cuido de assuntos com os quais o Magistrado não pode se dar ao luxo de perder tempo.");
         aguardarEnter();
-        System.out.println("- Já quer sobre o aviso. Aqui vai, o monstro já matou 20 pessoas contando moradores e soldados.");
+        System.out.println("- Já que é sobre o aviso... Aqui vai: o monstro já matou 20 pessoas, contando moradores e soldados.");
         aguardarEnter();
-        System.out.println("- A maioria dos cadáveres foram encontrados ao norte do vila perto do rio Morskie Oko.");
+        System.out.println("- A maioria dos cadáveres foram encontrados ao norte da vila perto do rio Morskie Oko.");
         aguardarEnter();
         System.out.println("- Todos eles estavam tão estraçalhados que mal podiam ser reconhecidos.");
         aguardarEnter();
@@ -68,27 +68,27 @@ public class Main {
         System.out.println("- Alguma pergunta?");
         System.out.println("1) Onde foi encontrado o cadáver mais recente?");
         System.out.println("2) Tem alguma ideia de que monstro pode ser?");
-        System.out.println("3) Algum ferimento que chame atenção nas vitimas?");
+        System.out.println("3) Algum ferimento que chame atenção nas vítimas?");
         System.out.println("Digite uma opção:");
         int escolha2 = scanner.nextInt();
         scanner.nextLine(); 
         if (escolha2 == 1){
             System.out.println("- Pelo que recebi, ele foi encontrado morto hoje de manhã perto das docas do leste.");
             aguardarEnter();
-            System.out.println("- Antes desse, acharam uma criança. Provavelmente foi brincar na floresta sem ninguém ver e aconteceu oque aconteceu.");
+            System.out.println("- Antes desse, acharam uma criança. Provavelmente foi brincar na floresta sem ninguém ver e aconteceu o que aconteceu");
         }else if(escolha2 == 2){
             System.out.println("- Não faço ideia, não conheço monstros e os moradores também não.");
             aguardarEnter();
             System.out.println("- Antes dessa maldita guerra, monstros quase nunca apareciam por aqui.");
             aguardarEnter();
-            System.out.println("- Mas deve ser um bem agressivo, ataca tudo que vé");
+            System.out.println("- Mas deve ser um bem agressivo, ataca tudo que vê.");
         }else{
             System.out.println("- Pelo que os soldados relataram, a grande maioria estavam completamente destroçados, só eram reconhecidos por suas roupas.");
             aguardarEnter();
             System.out.println("- Bom, eu não conseguiria detalhar muito, afinal fiz questão de não olhar para os corpos.");
         }
         aguardarEnter();
-        System.out.println("- Bom, isso é tudo que sei. Se quiser saber detalhes do cadáver ou do local, vá falar com Regis o pescador que encontrou o coitado hoje de manhã. Vá até as docas do leste. Ele sempre veste um gibão verde, não deve ser dificil de achar.");
+        System.out.println("- Bom, isso é tudo que sei. Se quiser saber detalhes do cadáver ou do local, vá falar com Regis, o pescador que encontrou o coitado hoje de manhã. Vá até as docas do leste. Ele sempre veste um gibão verde, não deve ser difícil de achar.");
         aguardarEnter();
         System.out.println("- Agora saia daqui, tenho muita coisa pra fazer.");
         aguardarEnter();
@@ -137,19 +137,19 @@ public class Main {
         aguardarEnter();
         System.out.println("- Tenha cuidado, já morreram muitos. Não quero encontrar seu corpo boiando amanhã.");
         aguardarEnter();
-        System.out.println("Seguindo o que Regis te disse, você segue o rio pelas proximidades da floresta.");
+        System.out.println("Seguindo as instruções de Regis, você toma o caminho do rio pelas proximidades da floresta.");
         aguardarEnter();
-        System.out.println("Aproximadamente 1 hora andando nas margens do rio, você sente um cheiro podrido não tão forte. Algo foi morto recentemente.");
+        System.out.println("Após andar por aproximadamente 1 hora nas margens do rio, você sente um cheiro pútrido não tão forte. Algo foi morto recentemente.");
         aguardarEnter();
-        System.out.println("Conforme você avança em direção ao odor, uma névoa lentamente se forma ao redor no local.");
+        System.out.println("Conforme você avança em direção ao odor, uma névoa lentamente se forma ao redor.");
         aguardarEnter();
-        System.out.println("Ao chegar no local, você encontra uma mulher morta. Pelo estado do corpo, está morta por pelo menos algumas poucas horas.");
+        System.out.println("Ao chegar no local, você encontra uma mulher morta. Pelo estado do corpo, está morta há pelo menos algumas poucas horas.");
         aguardarEnter();
-        System.out.println("Os ferimentos estão parecidos com o que mencionaram antes, estraçalhado mas essa está com o coração arrancado. Aparentemente, o monstro demora para matar suas vitimas, ele os desmembra parte por parte.");
+        System.out.println("Os ferimentos estão parecidos com o que mencionaram antes. O corpo está estraçalhado, mas esta está com o coração arrancado. Aparentemente, o monstro demora para matar suas vítimas, pois os desmembra parte por parte.");
         aguardarEnter();
-        System.out.println("Um sadismo desse não é qualquer monstro que possuí, você percebe ao olhar no chão um rastro de sangue fresco. Segui-lo talvez o leve para algum lugar.");
+        System.out.println("Um sadismo desses não é qualquer monstro que possui. Você percebe ao olhar no chão um rastro de sangue fresco. Segui-lo talvez o leve para algum lugar.");
         aguardarEnter();
-        System.out.println("Mas antes que fosse seguí-lo, você escuta movimentação no rio atras de vocé.");
+        System.out.println("Mas antes que fosse segui-lo, você escuta movimentação no rio atrás de você.");
         aguardarEnter();
         
         // CRIAÇÃO DO INIMIGO 
@@ -191,11 +191,11 @@ public class Main {
 
         // LOOT
         if (jogadorVenceu) {
-            System.out.println("O cheiro do cadáver atraiu o afogador. É improvável que tenha sido um afogador ou bruxa aquática, eles geralmente são monstros abutres que comem carcaças");
+            System.out.println("O cheiro do cadáver atraiu o afogador. É improvável que tenha sido um afogador ou bruxa aquática, pois eles geralmente são monstros necrófagos que comem carcaças.");
             aguardarEnter(); 
-            System.out.println("Se bem que você conheçe muitas historias de afogadores atacando pescadores, mas nenhum afogador tortura suas vitimas antes de matar.");
+            System.out.println("Se bem que você conhece muitas histórias de afogadores atacando pescadores, mas nenhum afogador tortura suas vítimas antes de matar.");
             aguardarEnter();
-            System.out.println("Seria um desperdicio deixar o corpo do afogador aprodrecer, é dito que glândulas de afogador ajudam a curar doenças");
+            System.out.println("Seria um desperdício deixar o corpo do afogador apodrecer. É dito que glândulas de afogador ajudam a curar doenças.");
             aguardarEnter();
 
             Inventario mochilaDoJogador = jogador.getInventario();
@@ -214,19 +214,19 @@ public class Main {
         
         System.out.println("Voltando ao rastro de sangue, você percebe que ele vai em direção ao interior da floresta.");
         aguardarEnter();
-        System.out.println("Agora que está longe do rio, você consegue ver as pegadas do monstro. São grandes quase como se um celeiro caminhasse e parece que o monstro é quadrupede.");
+        System.out.println("Agora que está longe do rio, você consegue ver as pegadas do monstro. São grandes, quase como se um celeiro caminhasse, e parece que o monstro é quadrúpede.");
         aguardarEnter();
-        System.out.println("Sádico, quadrupede e grande. É possível descartar uma centena de monstros dessas caracteristicas.");
+        System.out.println("Sádico, quadrúpede e grande. É possível descartar uma centena de monstros com essas características.");
         aguardarEnter();
         System.out.println("Você provavelmente está enfrentando um monstro Relicto.");
         aguardarEnter();
-        System.out.println("Monstros Relictos, criaturas tão antigas e poderosas que são considerados fosseis vivos. Agora a situação muda, seu oponente é muito poderoso e se deve avançar com cuidado!");
+        System.out.println("Monstros Relictos, criaturas tão antigas e poderosas que são considerados fósseis vivos. Agora a situação muda. Seu oponente é muito poderoso e se deve avançar com cuidado!");
         aguardarEnter();
-        System.out.println("Seguindo as pegadas é póssivel ver o rastro de destruição por onde o monstro passa, árvores derrubadas como se fossem galhos.");
+        System.out.println("Seguindo as pegadas, é possível ver o rastro de destruição por onde o monstro passa, árvores derrubadas como se fossem galhos.");
         aguardarEnter();
-        System.out.println("Adentrando ainda mais fundo na floresta você sente outro cheiro podrido, mas esse é muito forte!");
+        System.out.println("Adentrando ainda mais fundo na floresta, você sente outro cheiro podre, mas esse é muito forte!");
         aguardarEnter();
-        System.out.println("Se aproximando do cheiro você encontra um bando de carniçais devorando a origem do cheiro. Um corpo de um soldado.");
+        System.out.println("Aproximando-se do cheiro, você encontra um bando de carniçais devorando a origem do cheiro: um corpo de um soldado.");
 
         // CRIAÇÃO DO INIMIGO 2
         Inimigo carnical = criarCarnical();
@@ -275,27 +275,27 @@ public class Main {
             System.out.println("✨ Você coleta [Garras de Carniçal] e cria uma [Poção de Ataque]! ✨");
         }
         aguardarEnter();
-        System.out.println("Os carniçais estavam comendo o corpo do soldado com armadura e tudo. Hoje em dia carniçais comem qualquer coisa basicamente");
+        System.out.println("Os carniçais estavam comendo o corpo do soldado com armadura e tudo. Hoje em dia carniçais comem basicamente qualquer coisa.");
         aguardarEnter();
         System.out.println("Tentando analisar do que sobrou do homem, você percebe ele deve ser um dos soldados que tentaram caçar a criatura. Aparentemente não deu certo.");
         aguardarEnter();
-        System.out.println("Olhando atentamente você percebe que o coração dele assim como a mulher de antes também foi arrancado.");
+        System.out.println("Olhando atentamente, você percebe que o coração dele, assim como o da mulher de antes, também foi arrancado.");
         aguardarEnter();
-        System.out.println("Vasculhando os arredores você vê uma pelagem cinza com pontas marrom no chão.");
+        System.out.println("Vasculhando os arredores, você vê uma pelagem cinza com pontas marrom no chão.");
         aguardarEnter();
         System.out.println("É isso! Não é um relicto qualquer! O monstro é um Chorabash!");
         aguardarEnter();
         System.out.println("Você sabe muito bem o que é um Chorabash!");
         aguardarEnter();
-        System.out.println("Uma das linhagens mais únicas dos relictos, monstros extremamente raros hoje em dia.");
+        System.out.println("Uma das linhagens únicas dos relictos, monstros extremamente raros hoje em dia.");
         aguardarEnter();
         System.out.println("Chorabashes são monstros grandes e perigosos que se parecem com demônios, mas com chifres de carneiro e um grande olho na testa.");
         aguardarEnter();
-        System.out.println("A maioria foi extinta a 1000 anos atrás durante a grande caçada bruxo aos relictos.");
+        System.out.println("A maioria foi extinta há 1000 anos durante a grande caçada dos bruxos aos relictos.");
         aguardarEnter();
         System.out.println("Um sobrevivente da grande caçada agora caça os moradores de Pomar Branco!");
         aguardarEnter();
-        System.out.println("Sabendo disso, você deve se preparar antes de o enfretar. Lutar contra um Chorabash sem preparo é a mesmo coisa que suicídio!");
+        System.out.println("Sabendo disso, você deve se preparar antes de enfrentá-lo. Lutar contra um Chorabash sem preparo é a mesma coisa que suicídio!");
         aguardarEnter();
         System.out.println("Mas é preciso saber onde ele se esconde.");
         aguardarEnter();
@@ -308,6 +308,7 @@ public class Main {
         System.out.println("Você sai da caverna, descança e começa a preparar seus equipamentos para o embate.");
         aguardarEnter();
         System.out.println("...");
+        aguardarEnter();
         System.out.println("Você medita e prepara suas poções...");
         
         // Cura o HP 
