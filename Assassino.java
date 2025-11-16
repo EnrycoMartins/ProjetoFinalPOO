@@ -33,7 +33,7 @@ public final class Assassino extends Personagem {
         if (this.getStamina() < CUSTO_STAMINA_BESTA) {
             System.out.println(this.getNome() + " não tem stamina suficiente para atirar com a besta! Stamina: " + this.getStamina());
             System.out.println(this.getNome() + " recorre a um ataque físico...");
-            super.atacar(inimigo); //
+            super.atacar(inimigo); 
             return; // Encerra o turno
         }
 
@@ -51,6 +51,7 @@ public final class Assassino extends Personagem {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
             // ROLAGEM DE DANO (Se Acertou)
+            // Rola o d20 de novo para o dano + ataque
             int danoBase = this.d20.rolar();
             int danoTotal = danoBase + this.getAtaque(); // Dano baseado no Ataque (como no Personagem)
             System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
@@ -72,7 +73,7 @@ public final class Assassino extends Personagem {
         if (this.getStamina() < CUSTO_STAMINA_ESTOCADA) {
             System.out.println(this.getNome() + " não tem stamina suficiente para a estocada! Stamina: " + this.getStamina());
             System.out.println(this.getNome() + " recorre a um ataque físico...");
-            super.atacar(inimigo); //
+            super.atacar(inimigo);
             return; // Encerra o turno
         }
 
@@ -90,6 +91,7 @@ public final class Assassino extends Personagem {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
             // ROLAGEM DE DANO (Se Acertou)
+            // Rola o d20 de novo para o dano + ataque
             int danoBase = this.d20.rolar();
             int danoTotal = danoBase + this.getAtaque(); 
             System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
@@ -129,6 +131,7 @@ public final class Assassino extends Personagem {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
             // ROLAGEM DE DANO (Se Acertou)
+            // Rola o d20 de novo para o dano + ataque
             int danoBase = this.d20.rolar();
             int danoTotal = danoBase + this.getAtaque(); 
             System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
@@ -160,7 +163,7 @@ public final class Assassino extends Personagem {
         int RollDado = this.d20.rolar(); 
         int rolagemAtaque = RollDado + this.getAtaque() + BONUS_ATAQUE_FUMACA; 
 
-        System.out.println(this.getNome() + " joga uma bomba de fumaça e ataca no meio da confusão!");
+        System.out.println(this.getNome() + " joga uma bomba de fumaça e ataca no meio da névoa!");
         System.out.println("(Rolagem:" + RollDado + ") + Bônus:" + this.getAtaque() + " + Fumaça:" + BONUS_ATAQUE_FUMACA + " = " + rolagemAtaque);
         
         // COMPARAÇÃO COM DEFESA
@@ -168,6 +171,7 @@ public final class Assassino extends Personagem {
             System.out.println("ACERTOU! (Rolagem " + rolagemAtaque + " > Defesa " + inimigo.getDefesa() + ")");
 
             // ROLAGEM DE DANO (Se Acertou)
+            // Rola o d20 de novo para o dano + ataque
             int danoBase = this.d20.rolar();
             int danoTotal = danoBase + this.getAtaque(); 
             System.out.println("Dano: (D20: " + danoBase + " + Bônus: " + this.getAtaque() + " = " + danoTotal + " de dano)");
